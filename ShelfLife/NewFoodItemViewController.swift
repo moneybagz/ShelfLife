@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class NewFoodItemViewController: UIViewController {
+class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     @IBOutlet var foodCategoryPicker: UIPickerView!
@@ -18,11 +19,27 @@ class NewFoodItemViewController: UIViewController {
     @IBOutlet var expDatePicker: UIDatePicker!
     
     
+    var categories:[String] = []
+    var category:String?
+    var fetchResultsController: NSFetchedResultsController<Category>!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setup PickerView 
+        foodCategoryPicker.dataSource = self
+        foodCategoryPicker.delegate = self
 
-        // Do any additional setup after loading the view.
+        // Fetch the category names for the UIPikckerView
+        fetchResultsController = DAO.getCategories()
+        fetchResultsController.delegate = self
+        
+        let results = fetchResultsController.fetchedObjects
+        category = results?.first?.name
+        for result in results! {
+            categories.append(result.name!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +48,25 @@ class NewFoodItemViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+    }
+    
+    // MARK: - PickerView Datasource
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    // MARK: - PickerView  Delegate
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categories[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        category = categories[row]
+        print(category)
     }
 
     /*

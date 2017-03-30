@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ra-C5-HQu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3350" y="-599"/>
+            <point key="canvasLocation" x="5870" y="488"/>
         </scene>
         <!--Categories-->
         <scene sceneID="Akh-lk-4Bg">
@@ -216,7 +216,13 @@
                             <constraint firstItem="0Jb-jS-MVJ" firstAttribute="top" secondItem="ZKt-XR-mW9" secondAttribute="bottom" id="xnX-W5-tuG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Shelf Life" id="Yay-HM-hCZ"/>
+                    <navigationItem key="navigationItem" title="Shelf Life" id="Yay-HM-hCZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Znd-IN-Nxz">
+                            <connections>
+                                <segue destination="U6A-Jl-7cL" kind="show" id="UNr-qd-q28"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="0Jb-jS-MVJ" id="j1h-aH-Z4g"/>
                     </connections>
@@ -242,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0v-wN-r4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5828" y="124.58770614692655"/>
+            <point key="canvasLocation" x="5870" y="-234"/>
         </scene>
         <!--Item-->
         <scene sceneID="2ro-lq-hG5">
@@ -269,6 +275,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="fbu-D4-mrb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1xd-rs-h8x">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

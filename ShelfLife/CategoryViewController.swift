@@ -44,7 +44,7 @@ class CategoryViewController: UIViewController, UITableViewDataSource, UITableVi
         return 0
     }
     
-    // implement the cell
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "catCell", for: indexPath) as! CategoryTableViewCell
         
