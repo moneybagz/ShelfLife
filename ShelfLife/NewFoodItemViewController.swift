@@ -35,9 +35,12 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     var barCodeFrameView:UIView?
     var barCode:Int?
     
-
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add UIToolBar on keyboard and Done button on UIToolBar
+        self.addDoneButtonOnKeyboard()
         
         // Setup textfield delegate
         nameTextField.delegate = self
@@ -180,15 +183,15 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     @IBAction func saveButtonPressed(_ sender: Any) {
         
         // If user does not give food item a name give alert message
-//        guard nameTextField.text != nil && nameTextField.text != "" else {
-//            
-//            let alertController = UIAlertController(title: "CANNOT SAVE", message: "food item must have a name", preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
-//            alertController.addAction(okAction)
-//            present(alertController, animated: true, completion: nil)
-//            
-//            return
-//        }
+        guard nameTextField.text != nil && nameTextField.text != "" else {
+            
+            let alertController = UIAlertController(title: "CANNOT SAVE", message: "food item must have a name", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
         
         // If user does not change exp date give alert message
         if isBoughtSegmentControl.selectedSegmentIndex == 1 {
@@ -221,7 +224,7 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         let foodItem = FoodItem(context: context)
         
         // NAME
-        foodItem.name = "poo"//nameTextField.text
+        foodItem.name = nameTextField.text
         // CATEGORY
         foodItem.toCategory = categories?[foodCategoryPicker.selectedRow(inComponent: 0)]
         // IMAGE
@@ -372,7 +375,30 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         view.endEditing(true)
     }
     
-   
+    // custom method for putting a done button on number pad
+    func addDoneButtonOnKeyboard()
+    {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewFoodItemViewController.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.quantityTextField.inputAccessoryView = doneToolbar
+        
+    }
+    
+    func doneButtonAction()
+    {
+        self.quantityTextField.resignFirstResponder()
+    }
     
     /*
     // MARK: - Navigation
