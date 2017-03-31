@@ -108,6 +108,9 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        }
         
         cell.foodItemLabel.text = foodItem.name
+        if let data = foodItem.picture {
+            cell.foodItemImage.image = UIImage(data: data as Data)
+        }
         
         return cell
     }
