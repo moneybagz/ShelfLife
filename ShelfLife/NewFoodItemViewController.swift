@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
-class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCaptureMetadataOutputObjectsDelegate {
     
     
     @IBOutlet var foodCategoryPicker: UIPickerView!
@@ -18,6 +20,8 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet var quantityTextField: UITextField!
     @IBOutlet var expDatePicker: UIDatePicker!
     @IBOutlet var foodImageView: UIImageView!
+    @IBOutlet var barcodeLabel: UILabel!
+    @IBOutlet var quantityLabel: UILabel!
     
     
     var categories:[Category]?
@@ -25,13 +29,21 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     var imageIsEdited = false
     var fetchResultsController: NSFetchedResultsController<Category>!
     
+    var captureSession:AVCaptureSession?
+    var videoPreviewLayer:AVCaptureVideoPreviewLayer?
+    var barCodeFrameView:UIView?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Hide until scanned
+        barcodeLabel.isHidden = true
+        
         // Hide until "in Fridge" is selected
         quantityTextField.isHidden = true
         expDatePicker.isHidden = true
+        quantityLabel.isHidden = true
         
         // Setup PickerView 
         foodCategoryPicker.dataSource = self
@@ -54,6 +66,8 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
     // MARK: Actions
     @IBAction func editImage(_ sender: Any) {
@@ -78,6 +92,56 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         present(imagePickerController, animated: true, completion: nil)
     }
     
+    @IBAction func scanBarCodePressed(_ sender: Any) {
+        
+        // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
+        // as the media type parameter.
+        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        do {
+            // Get an instance of the AVCaptureDeviceInput class using previous device object
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            
+            // Initialize the captureSession object
+            captureSession = AVCaptureSession()
+            // Set the input device on the capture captureSession
+            captureSession?.addInput(input)
+            
+        } catch {
+            print(error)
+            return
+        }
+        
+        // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
+        let captureMetadataOutput = AVCaptureMetadataOutput()
+        captureSession?.addOutput(captureMetadataOutput)
+        
+        // Set delegate and use the default queue to execute the call back
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        captureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeUPCECode]
+        
+        // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        videoPreviewLayer?.frame = view.layer.bounds
+        view.layer.addSublayer(videoPreviewLayer!)
+        
+        // Start video capture.
+        captureSession?.startRunning()
+        
+        // Move the message label to the top view
+//        view.bringSubview(toFront: messageLabel)
+        
+        // Initialize QR Code Frame to highlight the QR code
+        barCodeFrameView = UIView()
+        if let barCodeFrameView = barCodeFrameView {
+            barCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            barCodeFrameView.layer.borderWidth = 2
+            view.addSubview(barCodeFrameView)
+            view.bringSubview(toFront: barCodeFrameView)
+        }
+    }
+    
     @IBAction func indexChanged(_ sender: Any) {
         switch inFridgeSegmentControl.selectedSegmentIndex
         {
@@ -86,16 +150,74 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
             // if item is not bought hide exp date and quantity
             quantityTextField.isHidden = true
             expDatePicker.isHidden = true
+            quantityLabel.isHidden = true
         case 1:
             NSLog("History selected")
             quantityTextField.isHidden = false
             expDatePicker.isHidden = false
+            quantityLabel.isHidden = false
         default:
             break;
         }
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+    }
+    
+    // MARK: - UAVCapture Metadata Output Objects Delegate
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+        
+//        // Check if the metadataObjects array is not nil and it contains at least one object
+//        if metadataObjects == nil || metadataObjects.count == 0 {
+//            barCodeFrameView?.frame = .zero
+//            //messageLabel.text = "No QR code is detected"
+//
+//            return
+//        }
+        
+        // Get the metadata object
+        let metaDataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+//        if metaDataObj.type == AVMetadataObjectTypeEAN13Code {
+//            // If the found metadata is equal to the barcode metadata then update the status label's text and set the bounds
+//            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+//            barCodeFrameView?.frame = barCodeObject!.bounds
+//            
+//            if metaDataObj.stringValue != nil {
+//                //messageLabel.text = metaDataObj.stringValue
+//                captureSession?.stopRunning()
+//            }
+//        }
+        
+        if metaDataObj.type == AVMetadataObjectTypeEAN8Code {
+            
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+            barCodeFrameView?.frame = barCodeObject!.bounds
+            
+            if metaDataObj.stringValue != nil {
+                //messageLabel.text = metaDataObj.stringValue
+                barcodeLabel.isHidden = false
+                
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(removeBarCodeSession), userInfo: nil, repeats: false)
+            }
+        }
+        
+//        if metaDataObj.type == AVMetadataObjectTypeUPCECode {
+//            
+//            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+//            barCodeFrameView?.frame = barCodeObject!.bounds
+//            
+//            if metaDataObj.stringValue != nil {
+//                //messageLabel.text = metaDataObj.stringValue
+//                captureSession?.stopRunning()
+//            }
+//        }
+    }
+    
+    func removeBarCodeSession() {
+        captureSession?.stopRunning()
+        barCodeFrameView?.removeFromSuperview()
+        videoPreviewLayer?.removeFromSuperlayer()
     }
     
     // MARK: - UIImage Picker Controller Delegate

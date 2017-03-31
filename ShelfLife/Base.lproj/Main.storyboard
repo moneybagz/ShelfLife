@@ -84,15 +84,34 @@
                                     <action selector="editImage:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="Kx1-qy-3ss"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sG-56-WvE">
+                                <rect key="frame" x="267" y="268" width="92" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Scan BarCode"/>
+                                <connections>
+                                    <action selector="scanBarCodePressed:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="yTq-OV-MrP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bar Code Scanned" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sun-Zj-CYI">
+                                <rect key="frame" x="174" y="268" width="76" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="barcodeLabel" destination="Sun-Zj-CYI" id="3RR-CC-a2m"/>
                         <outlet property="expDatePicker" destination="MCN-wq-vQ5" id="4LL-jS-Lqi"/>
                         <outlet property="foodCategoryPicker" destination="3Px-cb-oaM" id="UFw-LY-nxj"/>
                         <outlet property="foodImageView" destination="y5O-uX-VCR" id="0bS-CN-7Zo"/>
                         <outlet property="inFridgeSegmentControl" destination="fLn-Hn-wFS" id="LDQ-rv-VUC"/>
                         <outlet property="nameTextField" destination="ugr-CZ-rc3" id="AVp-zN-Xvu"/>
+                        <outlet property="quantityLabel" destination="hcA-mf-0ZV" id="kdQ-O7-JJm"/>
                         <outlet property="quantityTextField" destination="FEG-gi-fnm" id="rcz-mc-7TO"/>
                     </connections>
                 </viewController>
