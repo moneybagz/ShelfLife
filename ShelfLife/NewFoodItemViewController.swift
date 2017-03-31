@@ -16,7 +16,7 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     
     @IBOutlet var foodCategoryPicker: UIPickerView!
     @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var inFridgeSegmentControl: UISegmentedControl!
+    @IBOutlet var isBoughtSegmentControl: UISegmentedControl!
     @IBOutlet var quantityTextField: UITextField!
     @IBOutlet var expDatePicker: UIDatePicker!
     @IBOutlet var foodImageView: UIImageView!
@@ -29,9 +29,11 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     var imageIsEdited = false
     var fetchResultsController: NSFetchedResultsController<Category>!
     
+    // Properties for AVCapture Metadata Output Object Delegate
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var barCodeFrameView:UIView?
+    var barCode:Int?
     
 
     override func viewDidLoad() {
@@ -154,7 +156,7 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     }
     
     @IBAction func segmentIndexChanged(_ sender: Any) {
-        switch inFridgeSegmentControl.selectedSegmentIndex
+        switch isBoughtSegmentControl.selectedSegmentIndex
         {
         case 0:
             // if item is not bought hide exp date and quantity
@@ -172,32 +174,105 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
 
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        // If user does not give food item a name give alert message
+//        guard nameTextField.text != nil && nameTextField.text != "" else {
+//            
+//            let alertController = UIAlertController(title: "CANNOT SAVE", message: "food item must have a name", preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+//            alertController.addAction(okAction)
+//            present(alertController, animated: true, completion: nil)
+//            
+//            return
+//        }
+        
+        // If user does not change exp date give alert message
+        if isBoughtSegmentControl.selectedSegmentIndex == 1 {
+            // Compare Bought date to exp date, make sure they are different
+            // Components for Bought date
+            let date = Date()
+            let units: Set<Calendar.Component> = [.day, .month, .year]
+            let components = Calendar.current.dateComponents(units, from: date)
+            
+            // Components for exp date
+            let expDate = expDatePicker.date
+            let expComponents = Calendar.current.dateComponents(units, from: expDate)
+            guard components != expComponents else {
+                
+                let alertController = UIAlertController(title: "CANNOT SAVE", message: "bought date cannot be the same as expiration date", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                
+                return
+            }
+            
+            // User cannot leave quantity textfield without number
+            if quantityTextField.text == "" {
+                quantityTextField.text = "1"
+            }
+        }
+        
+        // Build a NSManaged Object FoodItem
+        let foodItem = FoodItem(context: context)
+        
+        // NAME
+        foodItem.name = "poo"//nameTextField.text
+        // CATEGORY
+        foodItem.toCategory = categories?[foodCategoryPicker.selectedRow(inComponent: 0)]
+        // IMAGE
+        if let image = foodImageView.image {
+            let data = UIImageJPEGRepresentation(image, 1.0)
+            foodItem.picture = data as NSData?
+        }
+        // BARCODE
+        if let itemBarCode = barCode {
+            foodItem.barcode = Int64(itemBarCode)
+        }
+        // IsInKITCHEN BOOL
+        foodItem.isInKitchen = isBoughtSegmentControl.selectedSegmentIndex == 0 ? false : true
+        if foodItem.isInKitchen == true {
+            // BOUGHT DATE
+            foodItem.boughtDate = Date() as NSDate?
+            // EXP DATE
+            foodItem.expDate = expDatePicker.date as NSDate?
+            // QUANTITY
+            foodItem.quantity = Int16(quantityTextField.text!)!
+        }
+        
+        //save food item to coreData SQL database
+        ad.saveContext()
+        
+        _ = navigationController?.popViewController(animated: true)
     }
     
     // MARK: - UAVCapture Metadata Output Objects Delegate
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
-//        // Check if the metadataObjects array is not nil and it contains at least one object
-//        if metadataObjects == nil || metadataObjects.count == 0 {
-//            barCodeFrameView?.frame = .zero
-//            //messageLabel.text = "No QR code is detected"
-//
-//            return
-//        }
+        // Check if the metadataObjects array is not nil and it contains at least one object
+        if metadataObjects == nil || metadataObjects.count == 0 {
+            barCodeFrameView?.frame = .zero
+
+            return
+        }
         
         // Get the metadata object
         let metaDataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         
-//        if metaDataObj.type == AVMetadataObjectTypeEAN13Code {
-//            // If the found metadata is equal to the barcode metadata then update the status label's text and set the bounds
-//            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
-//            barCodeFrameView?.frame = barCodeObject!.bounds
-//            
-//            if metaDataObj.stringValue != nil {
-//                //messageLabel.text = metaDataObj.stringValue
-//                captureSession?.stopRunning()
-//            }
-//        }
+        // If the found metadata is equal to the barcode metadata then update the set the bounds (Green Laser Thingy) save barcode and end session
+        if metaDataObj.type == AVMetadataObjectTypeEAN13Code {
+            
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+            barCodeFrameView?.frame = barCodeObject!.bounds
+            
+            if metaDataObj.stringValue != nil {
+                let barcodeString = metaDataObj.stringValue
+                barCode = Int(barcodeString!)
+                //print("!!!!!!!!!!!!!!!!EAN13 \(barCode) !!!!!!!!!!!!!!!!!!")
+                barcodeLabel.isHidden = false
+                
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(removeBarCodeSession), userInfo: nil, repeats: false)
+            }        }
         
         if metaDataObj.type == AVMetadataObjectTypeEAN8Code {
             
@@ -205,7 +280,9 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
             barCodeFrameView?.frame = barCodeObject!.bounds
             
             if metaDataObj.stringValue != nil {
-                //messageLabel.text = metaDataObj.stringValue
+                let barcodeString = metaDataObj.stringValue
+                barCode = Int(barcodeString!)
+                //print("!!!!!!!!!!!!!!!! \(barCode) !!!!!!!!!!!!!!!!!!")
                 barcodeLabel.isHidden = false
                 
                 Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(removeBarCodeSession), userInfo: nil, repeats: false)

@@ -16,13 +16,13 @@ extension FoodItem {
         return NSFetchRequest<FoodItem>(entityName: "FoodItem");
     }
 
-    @NSManaged public var barcode: Int16
+    @NSManaged public var barcode: Int64
     @NSManaged public var boughtDate: NSDate?
-    @NSManaged public var expBool: Bool
     @NSManaged public var expDate: NSDate?
-    @NSManaged public var isBought: Bool
+    @NSManaged public var isInKitchen: Bool
     @NSManaged public var name: String?
     @NSManaged public var picture: NSData?
+    @NSManaged public var quantity: Int16
     @NSManaged public var toCategory: Category?
     @NSManaged public var toRecipe: Recipe?
 

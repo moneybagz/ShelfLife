@@ -49,21 +49,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fLn-Hn-wFS">
-                                <rect key="frame" x="16" y="377" width="343" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Not Bought Yet"/>
-                                    <segment title="Bought"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentIndexChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="OUb-Pz-EjG"/>
-                                </connections>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-G4-Qh9">
                                 <rect key="frame" x="162" y="580" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="SAVE"/>
                                 <connections>
                                     <action selector="saveButtonPressed:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="kYu-y4-G8c"/>
                                 </connections>
@@ -79,6 +68,17 @@
                                 <rect key="frame" x="16" y="268" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fLn-Hn-wFS">
+                                <rect key="frame" x="16" y="377" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Not Bought Yet"/>
+                                    <segment title="Bought"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentIndexChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="OUb-Pz-EjG"/>
+                                </connections>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKt-wu-McI">
                                 <rect key="frame" x="104" y="308" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -112,7 +112,7 @@
                         <outlet property="expDatePicker" destination="MCN-wq-vQ5" id="4LL-jS-Lqi"/>
                         <outlet property="foodCategoryPicker" destination="3Px-cb-oaM" id="UFw-LY-nxj"/>
                         <outlet property="foodImageView" destination="y5O-uX-VCR" id="0bS-CN-7Zo"/>
-                        <outlet property="inFridgeSegmentControl" destination="fLn-Hn-wFS" id="LDQ-rv-VUC"/>
+                        <outlet property="isBoughtSegmentControl" destination="fLn-Hn-wFS" id="sJ8-B6-fdm"/>
                         <outlet property="nameTextField" destination="ugr-CZ-rc3" id="AVp-zN-Xvu"/>
                         <outlet property="quantityLabel" destination="hcA-mf-0ZV" id="kdQ-O7-JJm"/>
                         <outlet property="quantityTextField" destination="FEG-gi-fnm" id="rcz-mc-7TO"/>

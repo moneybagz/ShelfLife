@@ -17,7 +17,7 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var foodItems = [FoodItem]()
     var foodItemsInFridge = [FoodItem]()
     var foodItemsNotInFridge = [FoodItem]()
-    let headerTitles = ["In my fridge", "No longer in fridge"]
+    let headerTitles = ["In my kitchen", "No longer in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
 
     
@@ -31,10 +31,14 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //testData()
 
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // WHY DOES THIS METHOD HAVE TO BE STATIC?
         fetchResultsController = DAO.getFoodItems()
         fetchResultsController.delegate = self
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,15 +114,16 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func testData(){
         let foodItem1 = FoodItem(context: context)
         foodItem1.name = "cheese"
-        foodItem1.expBool = true
+        foodItem1.isInKitchen = true
         
         let foodItem2 = FoodItem(context: context)
         foodItem2.name = "Pear"
-        foodItem2.expBool = false
+        foodItem2.isInKitchen = false
         
         let foodItem3 = FoodItem(context: context)
         foodItem3.name = "Filet Mignon"
-        foodItem3.expBool = false
+        foodItem3.boughtDate = Date() as NSDate
+        foodItem3.isInKitchen = false
         
         foodItems.append(foodItem1)
         foodItems.append(foodItem2)
