@@ -50,8 +50,8 @@
                                 <rect key="frame" x="16" y="377" width="343" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Not In Fridge"/>
-                                    <segment title="In Fridge"/>
+                                    <segment title="Not Bought Yet"/>
+                                    <segment title="Bought"/>
                                 </segments>
                                 <connections>
                                     <action selector="indexChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="X5K-8D-NMD"/>
@@ -72,7 +72,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5O-uX-VCR">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5O-uX-VCR">
                                 <rect key="frame" x="16" y="268" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
