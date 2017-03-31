@@ -17,7 +17,7 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var foodItems = [FoodItem]()
     var foodItemsInFridge = [FoodItem]()
     var foodItemsNotInFridge = [FoodItem]()
-    let headerTitles = ["In my kitchen", "No longer in kitchen"]
+    let headerTitles = ["In my kitchen", "Not in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
 
     
@@ -29,16 +29,18 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         //testData()
-
+        
+        
+        // WHY DOES THIS METHOD HAVE TO BE STATIC?
+        fetchResultsController = DAO.getFoodItems()
+        fetchResultsController.delegate = self
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // WHY DOES THIS METHOD HAVE TO BE STATIC?
-        fetchResultsController = DAO.getFoodItems()
-        fetchResultsController.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,9 +18,9 @@ class DAO {
         
         let request: NSFetchRequest<FoodItem> = FoodItem.fetchRequest()
         
+        let inKitchenSort = NSSortDescriptor(key: "isInKitchen", ascending: false)
         let nameSort = NSSortDescriptor(key: "name", ascending: true)
-        let inKitchenSort = NSSortDescriptor(key: "isInKitchen", ascending: true)
-        request.sortDescriptors = [nameSort, inKitchenSort]
+        request.sortDescriptors = [inKitchenSort, nameSort]
         
         // create controller using ap delegate to retrieve context
         fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: ad.persistentContainer.viewContext, sectionNameKeyPath: "isInKitchen", cacheName: nil)
