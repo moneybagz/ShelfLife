@@ -11,7 +11,7 @@ import CoreData
 import AVFoundation
 
 
-class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCaptureMetadataOutputObjectsDelegate {
+class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
     
     
     @IBOutlet var foodCategoryPicker: UIPickerView!
@@ -38,6 +38,10 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setup textfield delegate
+        nameTextField.delegate = self
+        quantityTextField.delegate = self
         
         // Hide until scanned
         barcodeLabel.isHidden = true
@@ -356,7 +360,20 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
             }
         }
     }
+    
+    // MARK: Text Field Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+   
+    
     /*
     // MARK: - Navigation
 
