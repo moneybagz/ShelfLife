@@ -31,6 +31,9 @@
                                 <date key="date" timeIntervalSinceReferenceDate="512372642.85917598">
                                     <!--2017-03-28 05:44:02 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="datePickerChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="W9q-rR-red"/>
+                                </connections>
                             </datePicker>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ENTER FOOD NAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ugr-CZ-rc3">
                                 <rect key="frame" x="16" y="230" width="343" height="30"/>
@@ -54,7 +57,7 @@
                                     <segment title="Bought"/>
                                 </segments>
                                 <connections>
-                                    <action selector="indexChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="X5K-8D-NMD"/>
+                                    <action selector="segmentIndexChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="OUb-Pz-EjG"/>
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-G4-Qh9">

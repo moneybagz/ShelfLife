@@ -45,6 +45,13 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         expDatePicker.isHidden = true
         quantityLabel.isHidden = true
         
+        // Configure Date Picker
+        expDatePicker.minimumDate = Date()
+        var components = DateComponents()
+        components.setValue(20, for: .year)
+        let date: Date = Date()
+        expDatePicker.maximumDate = Calendar.current.date(byAdding: components, to: date)
+        
         // Setup PickerView 
         foodCategoryPicker.dataSource = self
         foodCategoryPicker.delegate = self
@@ -142,17 +149,19 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         }
     }
     
-    @IBAction func indexChanged(_ sender: Any) {
+    @IBAction func datePickerChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func segmentIndexChanged(_ sender: Any) {
         switch inFridgeSegmentControl.selectedSegmentIndex
         {
         case 0:
-            NSLog("Popular selected")
             // if item is not bought hide exp date and quantity
             quantityTextField.isHidden = true
             expDatePicker.isHidden = true
             quantityLabel.isHidden = true
         case 1:
-            NSLog("History selected")
             quantityTextField.isHidden = false
             expDatePicker.isHidden = false
             quantityLabel.isHidden = false
@@ -160,6 +169,7 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
             break;
         }
     }
+
     
     @IBAction func saveButtonPressed(_ sender: Any) {
     }
