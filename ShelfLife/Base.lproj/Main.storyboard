@@ -39,12 +39,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-gi-fnm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" placeholder="QUANTITY?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-gi-fnm">
                                 <rect key="frame" x="16" y="413" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fLn-Hn-wFS">
                                 <rect key="frame" x="16" y="377" width="343" height="29"/>
@@ -53,6 +53,9 @@
                                     <segment title="Not In Fridge"/>
                                     <segment title="In Fridge"/>
                                 </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="X5K-8D-NMD"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-G4-Qh9">
                                 <rect key="frame" x="162" y="580" width="46" height="30"/>
@@ -62,19 +65,32 @@
                                     <action selector="saveButtonPressed:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="kYu-y4-G8c"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcA-mf-0ZV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcA-mf-0ZV">
                                 <rect key="frame" x="126" y="413" width="233" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5O-uX-VCR">
+                                <rect key="frame" x="16" y="268" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKt-wu-McI">
+                                <rect key="frame" x="104" y="308" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="EDIT"/>
+                                <connections>
+                                    <action selector="editImage:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="Kx1-qy-3ss"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="expDatePicker" destination="MCN-wq-vQ5" id="4LL-jS-Lqi"/>
                         <outlet property="foodCategoryPicker" destination="3Px-cb-oaM" id="UFw-LY-nxj"/>
+                        <outlet property="foodImageView" destination="y5O-uX-VCR" id="0bS-CN-7Zo"/>
                         <outlet property="inFridgeSegmentControl" destination="fLn-Hn-wFS" id="LDQ-rv-VUC"/>
                         <outlet property="nameTextField" destination="ugr-CZ-rc3" id="AVp-zN-Xvu"/>
                         <outlet property="quantityTextField" destination="FEG-gi-fnm" id="rcz-mc-7TO"/>
@@ -82,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ra-C5-HQu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5870" y="488"/>
+            <point key="canvasLocation" x="5869.6000000000004" y="487.10644677661173"/>
         </scene>
         <!--Categories-->
         <scene sceneID="Akh-lk-4Bg">
