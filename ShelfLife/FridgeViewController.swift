@@ -172,6 +172,24 @@ class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ad.saveContext()
     }
     
+    // MARK: - Table view delegate methods
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            let foodItem = fetchResultsController.object(at: indexPath)
+            context.delete(foodItem)
+            ad.saveContext()
+        }
+    }
+
+    
     // MARK: - Fetch Results Controller Delegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
