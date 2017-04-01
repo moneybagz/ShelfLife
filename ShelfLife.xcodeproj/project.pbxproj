@@ -13,11 +13,11 @@
 		537B1DEB1E89C04B00C08547 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 537B1DEA1E89C04B00C08547 /* Assets.xcassets */; };
 		537B1DEE1E89C04B00C08547 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 537B1DEC1E89C04B00C08547 /* LaunchScreen.storyboard */; };
 		537B1E071E89CDD700C08547 /* FridgeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E061E89CDD700C08547 /* FridgeTableViewCell.swift */; };
-		537B1E151E89DB5400C08547 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E141E89DB5400C08547 /* FridgeViewController.swift */; };
+		537B1E151E89DB5400C08547 /* FridgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */; };
 		537B1E171E8A146300C08547 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E161E8A146300C08547 /* DAO.swift */; };
 		537B1E191E8C591E00C08547 /* NewFoodItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E181E8C591D00C08547 /* NewFoodItemViewController.swift */; };
 		537B1E2B1E8C7E3900C08547 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E2A1E8C7E3900C08547 /* CategoryTableViewCell.swift */; };
-		537B1E2D1E8C7E5D00C08547 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E2C1E8C7E5D00C08547 /* CategoryViewController.swift */; };
+		537B1E2D1E8C7E5D00C08547 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E2C1E8C7E5D00C08547 /* CategoryTableViewController.swift */; };
 		537B1E641E8EF2AC00C08547 /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E5E1E8EF2AB00C08547 /* Recipe+CoreDataClass.swift */; };
 		537B1E651E8EF2AC00C08547 /* Recipe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E5F1E8EF2AB00C08547 /* Recipe+CoreDataProperties.swift */; };
 		537B1E661E8EF2AC00C08547 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E601E8EF2AC00C08547 /* Category+CoreDataClass.swift */; };
@@ -35,11 +35,11 @@
 		537B1DED1E89C04B00C08547 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		537B1DEF1E89C04B00C08547 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		537B1E061E89CDD700C08547 /* FridgeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeTableViewCell.swift; sourceTree = "<group>"; };
-		537B1E141E89DB5400C08547 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeTableViewController.swift; sourceTree = "<group>"; };
 		537B1E161E8A146300C08547 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		537B1E181E8C591D00C08547 /* NewFoodItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFoodItemViewController.swift; sourceTree = "<group>"; };
 		537B1E2A1E8C7E3900C08547 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
-		537B1E2C1E8C7E5D00C08547 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		537B1E2C1E8C7E5D00C08547 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		537B1E5E1E8EF2AB00C08547 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		537B1E5F1E8EF2AB00C08547 /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		537B1E601E8EF2AC00C08547 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 		537B1DF71E89C15100C08547 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				537B1E2C1E8C7E5D00C08547 /* CategoryViewController.swift */,
-				537B1E141E89DB5400C08547 /* FridgeViewController.swift */,
+				537B1E2C1E8C7E5D00C08547 /* CategoryTableViewController.swift */,
+				537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */,
 				537B1E181E8C591D00C08547 /* NewFoodItemViewController.swift */,
 			);
 			name = Controller;
@@ -200,8 +200,8 @@
 				537B1DE91E89C04B00C08547 /* ShelfLife.xcdatamodeld in Sources */,
 				537B1E071E89CDD700C08547 /* FridgeTableViewCell.swift in Sources */,
 				537B1E661E8EF2AC00C08547 /* Category+CoreDataClass.swift in Sources */,
-				537B1E2D1E8C7E5D00C08547 /* CategoryViewController.swift in Sources */,
-				537B1E151E89DB5400C08547 /* FridgeViewController.swift in Sources */,
+				537B1E2D1E8C7E5D00C08547 /* CategoryTableViewController.swift in Sources */,
+				537B1E151E89DB5400C08547 /* FridgeTableViewController.swift in Sources */,
 				537B1E171E8A146300C08547 /* DAO.swift in Sources */,
 				537B1E651E8EF2AC00C08547 /* Recipe+CoreDataProperties.swift in Sources */,
 				537B1E671E8EF2AC00C08547 /* Category+CoreDataProperties.swift in Sources */,

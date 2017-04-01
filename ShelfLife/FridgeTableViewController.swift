@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class FridgeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var tableView: UITableView!
     

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fbu-D4-mrb">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,15 +18,15 @@
                         <viewControllerLayoutGuide type="bottom" id="04Y-Of-DZr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QG2-gK-OS8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-cb-oaM">
-                                <rect key="frame" x="0.0" y="64" width="375" height="158"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="158"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="MCN-wq-vQ5">
-                                <rect key="frame" x="0.0" y="451" width="375" height="112"/>
+                                <rect key="frame" x="0.0" y="451" width="414" height="112"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="512372642.85917598">
                                     <!--2017-03-28 05:44:02 +0000-->
@@ -125,31 +125,31 @@
         <!--Categories-->
         <scene sceneID="Akh-lk-4Bg">
             <objects>
-                <viewController id="7nu-fi-Gne" customClass="CategoryViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7nu-fi-Gne" customClass="CategoryTableViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8qz-Hf-ye6"/>
                         <viewControllerLayoutGuide type="bottom" id="sG7-3x-Ugb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AJP-HM-ObO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="160" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hae-ga-FOb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="catCell" id="tuA-sh-XnU" customClass="CategoryTableViewCell" customModule="ShelfLife" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="160"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tuA-sh-XnU" id="kuJ-2h-ygW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M1G-KO-fWX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="159.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whf-9y-Cxf">
-                                                    <rect key="frame" x="187" y="80" width="0.0" height="0.0"/>
+                                                    <rect key="frame" x="207" y="80" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="26"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -181,7 +181,9 @@
                             <constraint firstItem="hae-ga-FOb" firstAttribute="leading" secondItem="AJP-HM-ObO" secondAttribute="leading" id="xll-Sc-AA7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Categories" id="wkz-iW-rmq"/>
+                    <navigationItem key="navigationItem" title="Categories" id="wkz-iW-rmq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSy-Jy-DbM"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="hae-ga-FOb" id="M1W-3Q-ytx"/>
                     </connections>
@@ -193,35 +195,35 @@
         <!--Shelf Life-->
         <scene sceneID="Lk2-D8-3tW">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KuH-Nf-Z35" customClass="FridgeViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KuH-Nf-Z35" customClass="FridgeTableViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZKt-XR-mW9"/>
                         <viewControllerLayoutGuide type="bottom" id="6BC-tt-6Cx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zfO-bC-6BJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Jb-jS-MVJ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fridgeCell" id="MUK-KM-vj0" customClass="FridgeTableViewCell" customModule="ShelfLife" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUK-KM-vj0" id="yrY-Bz-xfu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jom-Ux-gye">
-                                                    <rect key="frame" x="303" y="8" width="64" height="64"/>
+                                                    <rect key="frame" x="342" y="8" width="64" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="FDa-jq-TAW"/>
                                                         <constraint firstAttribute="width" constant="64" id="II0-Jk-Zeg"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-ce-n5L">
-                                                    <rect key="frame" x="20" y="8" width="275" height="63.5"/>
+                                                    <rect key="frame" x="20" y="8" width="314" height="64"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -278,7 +280,7 @@
                         <viewControllerLayoutGuide type="bottom" id="QbJ-0a-y0U"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Up4-Om-siS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -288,11 +290,11 @@
             </objects>
             <point key="canvasLocation" x="5870" y="-234"/>
         </scene>
-        <!--Item-->
+        <!--Kitchen-->
         <scene sceneID="2ro-lq-hG5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5QY-KM-Q3Q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="utV-N3-C9I"/>
+                    <tabBarItem key="tabBarItem" title="Kitchen" id="utV-N3-C9I"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ET7-AA-ySI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
