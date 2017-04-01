@@ -156,6 +156,7 @@
                                                     <size key="shadowOffset" width="-2" height="-2"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.81176470590000005" green="0.84313725490000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Whf-9y-Cxf" firstAttribute="centerX" secondItem="kuJ-2h-ygW" secondAttribute="centerX" id="CVz-y4-xOW"/>
                                                 <constraint firstItem="M1G-KO-fWX" firstAttribute="top" secondItem="kuJ-2h-ygW" secondAttribute="top" id="QN4-jr-Jn4"/>
@@ -182,7 +183,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Categories" id="wkz-iW-rmq">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSy-Jy-DbM"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSy-Jy-DbM">
+                            <connections>
+                                <segue destination="WpR-Bh-LRj" kind="show" id="pzo-tD-wMY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="hae-ga-FOb" id="M1W-3Q-ytx"/>
@@ -327,6 +332,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rK3-LW-S3m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3350" y="125"/>
+        </scene>
+        <!--New Category View Controller-->
+        <scene sceneID="XAs-Jv-IBq">
+            <objects>
+                <viewController id="WpR-Bh-LRj" customClass="NewCategoryViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Msn-jJ-sws"/>
+                        <viewControllerLayoutGuide type="bottom" id="EV1-1L-Bd7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V6C-vD-KnN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ASq-9q-q0E">
+                                <rect key="frame" x="0.0" y="64" width="414" height="222"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ENTER CATERGORY NAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-AN-x7S">
+                                <rect key="frame" x="20" y="353" width="374" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Onw-MV-a3Q">
+                                <rect key="frame" x="133" y="294" width="148" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add / Edit Photo"/>
+                                <connections>
+                                    <action selector="addImage:" destination="WpR-Bh-LRj" eventType="touchUpInside" id="H4X-oZ-gK0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBm-oD-5fc">
+                                <rect key="frame" x="184" y="409" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="WpR-Bh-LRj" eventType="touchUpInside" id="zbM-VC-8xx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="categoryImageView" destination="ASq-9q-q0E" id="ZyI-eo-wv7"/>
+                        <outlet property="nameTextField" destination="Ph1-AN-x7S" id="Ia6-ed-i1S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MEh-9O-Hnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4176.811594202899" y="-1314.1304347826087"/>
         </scene>
         <!--Categories-->
         <scene sceneID="brG-sj-Ifk">
