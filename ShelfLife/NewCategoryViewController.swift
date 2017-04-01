@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewCategoryViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewCategoryViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
     @IBOutlet var categoryImageView: UIImageView!
@@ -21,7 +21,7 @@ class NewCategoryViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        nameTextField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,6 +100,16 @@ class NewCategoryViewController: UIViewController, UIImagePickerControllerDelega
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Text Field Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     /*

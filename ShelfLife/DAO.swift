@@ -19,7 +19,7 @@ class DAO {
         let request: NSFetchRequest<FoodItem> = FoodItem.fetchRequest()
         
         let inKitchenSort = NSSortDescriptor(key: "isInKitchen", ascending: false)
-        let nameSort = NSSortDescriptor(key: "name", ascending: true)
+        let nameSort = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
         request.sortDescriptors = [inKitchenSort, nameSort]
         
         // create controller using ap delegate to retrieve context
@@ -42,7 +42,7 @@ class DAO {
         
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         
-        let nameSort = NSSortDescriptor(key: "name", ascending: true)
+        let nameSort = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
         request.sortDescriptors = [nameSort]
         
         // create controller using ap delegate to retrieve context

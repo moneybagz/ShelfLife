@@ -57,6 +57,9 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         if let data = category.picture {
             cell.categoryImageView.image = UIImage(data: data as Data)
         }
+        else {
+            cell.categoryImageView.image = nil
+        }
         
         return cell
     }
