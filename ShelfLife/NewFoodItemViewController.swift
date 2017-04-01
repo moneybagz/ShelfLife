@@ -64,7 +64,7 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         // Setup PickerView 
         foodCategoryPicker.dataSource = self
         foodCategoryPicker.delegate = self
-
+        
         // Fetch the category names for the UIPikckerView
         fetchResultsController = DAO.getCategories()
         fetchResultsController.delegate = self
@@ -72,10 +72,19 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         categories = fetchResultsController.fetchedObjects!
         categoryName = categories?.first?.name
         
+        foodCategoryPicker.reloadAllComponents()
+        
         // Default image for food item is its Category Image
-        if let foodImage = UIImage(data: categories?.first?.picture as! Data) {
-            foodImageView.image = foodImage
+        if imageIsEdited == false {
+            if let foodImage = UIImage(data: categories?.first?.picture as! Data) {
+                foodImageView.image = foodImage
+            }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        //foodCategoryPicker.reloadAllComponents()
     }
 
     override func didReceiveMemoryWarning() {
@@ -366,6 +375,7 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
             }
         }
     }
+    
     
     // MARK: Text Field Delegate
     

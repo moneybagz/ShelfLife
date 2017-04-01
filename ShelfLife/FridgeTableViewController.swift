@@ -229,14 +229,27 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // Send selected FoodItem to the next View Controller
+        if segue.identifier == "toFoodItemVC" {
+            if tableView.indexPathForSelectedRow?.section == 0 {
+                let destinationVC = segue.destination as! FoodItemViewController
+                if let index = tableView.indexPathForSelectedRow {
+                    destinationVC.foodItem = foodItemsInFridge[index.row]
+                }
+            }
+            else {
+                let destinationVC = segue.destination as! FoodItemViewController
+                if let index = tableView.indexPathForSelectedRow {
+                    destinationVC.foodItem = foodItemsNotInFridge[index.row]
+                }
+            }
+        }
     }
-    */
+ 
 
 }

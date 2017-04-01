@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Food Item View Controller-->
+        <!--Shelf Life New / Edit-->
         <scene sceneID="06C-fu-fgB">
             <objects>
                 <viewController id="U6A-Jl-7cL" customClass="NewFoodItemViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
@@ -107,6 +107,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Shelf Life New / Edit" id="EyV-Cv-0Sq"/>
                     <connections>
                         <outlet property="barcodeLabel" destination="Sun-Zj-CYI" id="3RR-CC-a2m"/>
                         <outlet property="expDatePicker" destination="MCN-wq-vQ5" id="4LL-jS-Lqi"/>
@@ -247,7 +248,7 @@
                                         <connections>
                                             <outlet property="foodItemImage" destination="Jom-Ux-gye" id="PRG-8o-YBW"/>
                                             <outlet property="foodItemLabel" destination="yMS-ce-n5L" id="fov-cL-JuJ"/>
-                                            <segue destination="ZKU-JO-LQ2" kind="show" id="iBn-NK-nLI"/>
+                                            <segue destination="ZKU-JO-LQ2" kind="show" identifier="toFoodItemVC" id="iBn-NK-nLI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -276,10 +277,10 @@
             </objects>
             <point key="canvasLocation" x="5004" y="124.58770614692655"/>
         </scene>
-        <!--food-->
+        <!--Shelf Life Item-->
         <scene sceneID="y4Z-l2-VXO">
             <objects>
-                <viewController id="ZKU-JO-LQ2" sceneMemberID="viewController">
+                <viewController id="ZKU-JO-LQ2" customClass="FoodItemViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1JQ-0j-Sf2"/>
                         <viewControllerLayoutGuide type="bottom" id="QbJ-0a-y0U"/>
@@ -287,13 +288,79 @@
                     <view key="view" contentMode="scaleToFill" id="Up4-Om-siS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-3H-R0e">
+                                <rect key="frame" x="0.0" y="107" width="414" height="214"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2w-vI-8y7">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bought Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBF-wP-NHr">
+                                <rect key="frame" x="20" y="466" width="141" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expiration Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlk-Tp-r1V">
+                                <rect key="frame" x="253" y="466" width="141" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAR-xl-P6g">
+                                <rect key="frame" x="253" y="495" width="141" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqp-KA-AfI">
+                                <rect key="frame" x="20" y="495" width="141" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="freshBar" translatesAutoresizingMaskIntoConstraints="NO" id="qbx-N3-geL">
+                                <rect key="frame" x="32" y="358" width="350" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fresh Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNh-Wh-Eo1">
+                                <rect key="frame" x="137" y="329" width="141" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMX-9y-lcR">
+                                <rect key="frame" x="0.0" y="64" width="414" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="food" id="fRe-aW-Zff"/>
+                    <navigationItem key="navigationItem" title="Shelf Life Item" id="Lsl-iY-dn5"/>
+                    <connections>
+                        <outlet property="boughtDateLabel" destination="Pqp-KA-AfI" id="64N-1P-neT"/>
+                        <outlet property="expDateLabel" destination="XAR-xl-P6g" id="Sww-oA-KBJ"/>
+                        <outlet property="foodImageView" destination="R2w-vI-8y7" id="9IS-Q6-Sbz"/>
+                        <outlet property="nameLabel" destination="rMX-9y-lcR" id="RpR-Qv-yVz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0v-wN-r4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5870" y="-234"/>
+            <point key="canvasLocation" x="5869.5652173913049" y="-234.78260869565219"/>
         </scene>
         <!--Kitchen-->
         <scene sceneID="2ro-lq-hG5">
@@ -404,4 +471,7 @@
             <point key="canvasLocation" x="4173.6000000000004" y="-593.25337331334333"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="freshBar" width="1333" height="333"/>
+    </resources>
 </document>

@@ -25,6 +25,7 @@
 		537B1E681E8EF2AC00C08547 /* FoodItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E621E8EF2AC00C08547 /* FoodItem+CoreDataClass.swift */; };
 		537B1E691E8EF2AC00C08547 /* FoodItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E631E8EF2AC00C08547 /* FoodItem+CoreDataProperties.swift */; };
 		537B1E6D1E8F7A3D00C08547 /* NewCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E6C1E8F7A3D00C08547 /* NewCategoryViewController.swift */; };
+		537B1E6F1E904E5500C08547 /* FoodItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E6E1E904E5500C08547 /* FoodItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		537B1E621E8EF2AC00C08547 /* FoodItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		537B1E631E8EF2AC00C08547 /* FoodItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		537B1E6C1E8F7A3D00C08547 /* NewCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCategoryViewController.swift; sourceTree = "<group>"; };
+		537B1E6E1E904E5500C08547 /* FoodItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		537B1DF71E89C15100C08547 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				537B1E6E1E904E5500C08547 /* FoodItemViewController.swift */,
 				537B1E6C1E8F7A3D00C08547 /* NewCategoryViewController.swift */,
 				537B1E2C1E8C7E5D00C08547 /* CategoryTableViewController.swift */,
 				537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */,
@@ -213,6 +216,7 @@
 				537B1DE11E89C04B00C08547 /* AppDelegate.swift in Sources */,
 				537B1E191E8C591E00C08547 /* NewFoodItemViewController.swift in Sources */,
 				537B1E681E8EF2AC00C08547 /* FoodItem+CoreDataClass.swift in Sources */,
+				537B1E6F1E904E5500C08547 /* FoodItemViewController.swift in Sources */,
 				537B1E2B1E8C7E3900C08547 /* CategoryTableViewCell.swift in Sources */,
 				537B1E641E8EF2AC00C08547 /* Recipe+CoreDataClass.swift in Sources */,
 			);
