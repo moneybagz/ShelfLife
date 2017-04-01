@@ -358,8 +358,11 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         print(categoryName!)
         
         if imageIsEdited == false {
-            if let foodImage = UIImage(data: categories?[row].picture as! Data) {
-                foodImageView.image = foodImage
+            if let data = categories?[row].picture {
+                foodImageView.image = UIImage(data: data as Data)
+            }
+            else {
+                foodImageView.image = nil
             }
         }
     }

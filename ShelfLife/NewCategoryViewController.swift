@@ -54,6 +54,34 @@ class NewCategoryViewController: UIViewController, UIImagePickerControllerDelega
     }
 
     @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        // If user does not give category a name give alert message
+        guard nameTextField.text != nil && nameTextField.text != "" else {
+            
+            let alertController = UIAlertController(title: "CANNOT SAVE", message: "category must have a name", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        // Build a NSManaged Object Category
+        let category = Category(context: context)
+        
+        // NAME
+        category.name = nameTextField.text
+        // IMAGE
+        if let image = categoryImageView.image {
+            let data = UIImageJPEGRepresentation(image, 1.0)
+            category.picture = data as NSData?
+        }
+        
+        
+        //save category to coreData SQL database
+        ad.saveContext()
+        
+        _ = navigationController?.popViewController(animated: true)
     }
     
     // MARK: - UIImage Picker Controller Delegate

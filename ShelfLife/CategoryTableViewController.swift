@@ -53,7 +53,10 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
 
         
         cell.nameLabel.text = category.name
-        cell.categoryImageView.image = UIImage(data: category.picture as! Data)
+        
+        if let data = category.picture {
+            cell.categoryImageView.image = UIImage(data: data as Data)
+        }
         
         return cell
     }
