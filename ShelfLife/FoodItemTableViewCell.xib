@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FoodItemTableViewCell" customModule="ShelfLife" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yge-N1-QJ5">
+                    <rect key="frame" x="303" y="8" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="Hlo-QS-xc5"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="drk-k7-mac"/>
+                        <constraint firstAttribute="width" constant="64" id="vcd-g3-rhk"/>
+                        <constraint firstAttribute="height" constant="64" id="zTB-KS-9PF"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJV-44-gUt">
+                    <rect key="frame" x="20" y="8" width="275" height="64"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Yge-N1-QJ5" firstAttribute="leading" secondItem="uJV-44-gUt" secondAttribute="trailing" constant="8" id="4pY-XR-lFg"/>
+                <constraint firstItem="Yge-N1-QJ5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Cyb-wk-atg"/>
+                <constraint firstItem="uJV-44-gUt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="EUH-CE-NKp"/>
+                <constraint firstAttribute="bottom" secondItem="uJV-44-gUt" secondAttribute="bottom" constant="8" id="GdQ-gU-UXz"/>
+                <constraint firstItem="uJV-44-gUt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="LV7-fF-58l"/>
+                <constraint firstAttribute="trailing" secondItem="Yge-N1-QJ5" secondAttribute="trailing" constant="8" id="Q73-fV-ZNX"/>
+                <constraint firstAttribute="bottom" secondItem="Yge-N1-QJ5" secondAttribute="bottom" constant="8" id="jE9-sM-k5r"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="foodImageView" destination="Yge-N1-QJ5" id="l5o-RU-7my"/>
+                <outlet property="foodNameLabel" destination="uJV-44-gUt" id="6nM-L7-hpw"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="125"/>
+        </view>
+    </objects>
+</document>

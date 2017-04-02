@@ -126,7 +126,7 @@
         <!--Categories-->
         <scene sceneID="Akh-lk-4Bg">
             <objects>
-                <viewController id="7nu-fi-Gne" customClass="CategoryTableViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7nu-fi-Gne" customClass="CategoriesTableViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8qz-Hf-ye6"/>
                         <viewControllerLayoutGuide type="bottom" id="sG7-3x-Ugb"/>
@@ -170,6 +170,7 @@
                                         <connections>
                                             <outlet property="categoryImageView" destination="M1G-KO-fWX" id="fNS-ca-xts"/>
                                             <outlet property="nameLabel" destination="Whf-9y-Cxf" id="g2Y-93-KlJ"/>
+                                            <segue destination="wEy-AR-jAq" kind="show" identifier="toCategory" id="tks-mS-Y3E"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -450,7 +451,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEh-9O-Hnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4176.811594202899" y="-1314.1304347826087"/>
+            <point key="canvasLocation" x="4736" y="-1314"/>
+        </scene>
+        <!--Category Table View Controller-->
+        <scene sceneID="9Mg-Vm-db6">
+            <objects>
+                <viewController id="wEy-AR-jAq" customClass="CategoryTableViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l9x-VZ-Q1C"/>
+                        <viewControllerLayoutGuide type="bottom" id="4il-dF-FQy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FH4-cL-ZPq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DAL-ZM-YPP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fridgeCell" id="RTf-8D-Ul4">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTf-8D-Ul4" id="5kg-He-9ty">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="DAL-ZM-YPP" id="YLg-CB-muP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uEq-sx-7cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5473.913043478261" y="-1314.1304347826087"/>
         </scene>
         <!--Categories-->
         <scene sceneID="brG-sj-Ifk">

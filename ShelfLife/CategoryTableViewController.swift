@@ -1,31 +1,42 @@
 //
-//  CategoryViewController.swift
+//  CategoryTableViewController.swift
 //  ShelfLife
 //
-//  Created by Clyfford Millet on 3/29/17.
+//  Created by Clyfford Millet on 4/2/17.
 //  Copyright © 2017 Clyff Millet. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class CategoryTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate{
+class CategoryTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var tableView: UITableView!
     
+    var foodItems = [FoodItem]()
+    var foodInKitchen = [FoodItem]()
+    var foodNotInKitchen = [FoodItem]()
+    let headerTitles = ["In my kitchen", "Not in kitchen"]
+    var fetchResultsController: NSFetchedResultsController<FoodItem>!
+    var category: Category!
     
-    var categories: [String] = []
-    var fetchResultsController: NSFetchedResultsController<Category>!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Setup tableView delegates
         tableView.delegate = self
         tableView.dataSource = self
         
-        fetchResultsController = DAO.getCategories()
+        // register Xib cell
+        // reminder if you are going to use the same cell twice for more than one view controller, better to use a xib
+        let nib = UINib(nibName: "FoodItemTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "foodCell")
+        
+        // WHY DOES THIS METHOD HAVE TO BE STATIC?
+        fetchResultsController = DAO.getFoodItemsFor(category: category)
         fetchResultsController.delegate = self
+                
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,32 +44,84 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
+    // MARK: - Custom methods    
+    func getFreshnessWith(foodItem: FoodItem) -> UIColor {
+        
+        // Get total time between bought date and expiration date
+        let totalTime = foodItem.expDate?.timeIntervalSince(foodItem.boughtDate as! Date)
+        
+        // Get elapsed time between now and bought date
+        let now = Date()
+        let elapsedTime = now.timeIntervalSince(foodItem.boughtDate as! Date)
+        
+        // Compute the increase percentage
+        let percent:Int
+        let percentage = (elapsedTime) / (totalTime)! * 100
+        percent = Int(percentage)
+        
+        // Select color depending on increase percentage
+        switch percent {
+        case 0...50:
+            return UIColor(red: 26.0/255, green: 189.0/255, blue: 22.0/255, alpha: 1.0)
+        case 50...74:
+            return UIColor(red: 237.0/255, green: 222.0/255, blue: 9.0/255, alpha: 1.0)
+        case 75...87:
+            return UIColor(red: 238.0/255, green: 150.0/255, blue: 10.0/255, alpha: 1.0)
+        case 88...99:
+            return UIColor(red: 236.0/255, green: 56.0/255, blue: 9.0/255, alpha: 1.0)
+        default:
+            return UIColor(red: 83.0/255, green: 44.0/255, blue: 5.0/255, alpha: 1.0)
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if let sections = fetchResultsController.sections {
+            return sections.count
+        }
+        return 0
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let results = fetchResultsController.fetchedObjects
-        if let results = results {
-            return results.count
+        if let sections = fetchResultsController.sections {
+            let currentSection = sections[section]
+            return currentSection.numberOfObjects
         }
-        
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headerTitles[section]
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "catCell", for: indexPath) as! CategoryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as! FoodItemTableViewCell
         
-        let category = fetchResultsController.object(at: indexPath)
+        let foodItem = fetchResultsController.object(at: indexPath)
         
-
-        
-        cell.nameLabel.text = category.name
-        
-        if let data = category.picture {
-            cell.categoryImageView.image = UIImage(data: data as Data)
+        // split FoodItems between two arrays for each section
+        if indexPath.section == 0 {
+            foodInKitchen.append(foodItem)
         }
         else {
-            cell.categoryImageView.image = nil
+            foodNotInKitchen.append(foodItem)
+        }
+        
+        // CELL NAME
+        cell.foodNameLabel.text = foodItem.name
+        // CELL COLOR
+        if foodItem.boughtDate != nil && foodItem.expDate != nil {
+            cell.foodNameLabel.textColor = getFreshnessWith(foodItem: foodItem)
+        }
+        else {
+            cell.foodNameLabel.textColor = UIColor.black
+        }
+        // CELL PICTURE
+        if let data = foodItem.picture {
+            cell.foodImageView.image = UIImage(data: data as Data)
+        }
+        else {
+            cell.foodImageView.image = nil
         }
         
         return cell
@@ -75,18 +138,13 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     {
         if editingStyle == .delete
         {
-            let category = fetchResultsController.object(at: indexPath)
-            context.delete(category)
+            let foodItem = fetchResultsController.object(at: indexPath)
+            context.delete(foodItem)
             ad.saveContext()
         }
     }
     
-    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.contentView.clipsToBounds = true
-    }
-
+    
     // MARK: - Fetch Results Controller Delegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -105,12 +163,28 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         {
         case.insert:
             if let indexPath = newIndexPath {
-                
                 tableView.insertRows(at: [indexPath], with: .fade)
+                if indexPath.section == 0 {
+                    let foodItem = fetchResultsController.object(at: indexPath)
+                    foodInKitchen.insert(foodItem, at: indexPath.row)
+                }
+                else {
+                    let foodItem = fetchResultsController.object(at: indexPath)
+                    foodNotInKitchen.insert(foodItem, at: indexPath.row)
+                }
             }
         case.delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                if indexPath.section == 0 {
+                    foodInKitchen.remove(at: indexPath.row)
+                    for food in foodInKitchen {
+                        print("\(food.name)")
+                    }
+                }
+                else {
+                    foodNotInKitchen.remove(at: indexPath.row)
+                }
             }
         case.update:
             if let indexPath = indexPath {
@@ -126,14 +200,29 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    /*
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // Send selected FoodItem and fresh color to the next View Controller
+        if segue.identifier == "toFoodItemVC" {
+            if tableView.indexPathForSelectedRow?.section == 0 {
+                let destinationVC = segue.destination as! FoodItemViewController
+                if let index = tableView.indexPathForSelectedRow {
+                    let cell = tableView.cellForRow(at: index) as! FridgeTableViewCell
+                    destinationVC.nameColor = cell.foodItemLabel.textColor
+                    destinationVC.foodItem = foodInKitchen[index.row]
+                }
+            }
+            else {
+                let destinationVC = segue.destination as! FoodItemViewController
+                if let index = tableView.indexPathForSelectedRow {
+                    destinationVC.nameColor = UIColor.black
+                    destinationVC.foodItem = foodNotInKitchen[index.row]
+                }
+            }
+        }
     }
-    */
 
 }

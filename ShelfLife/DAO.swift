@@ -35,6 +35,37 @@ class DAO {
         return fetchResultsController
     }
     
+    // FETCH FOOD ITEMS FOR SPECIFIC CATEGORY
+    internal static func getFoodItemsFor(category:Category) -> NSFetchedResultsController<FoodItem> {
+        
+        // declare fetch results controller
+        let fetchResultsController: NSFetchedResultsController<FoodItem>
+        
+        // declare request for controller
+        let request: NSFetchRequest<FoodItem> = FoodItem.fetchRequest()
+        
+        // order for food items to be displayed
+        let inKitchenSort = NSSortDescriptor(key: "isInKitchen", ascending: false)
+        let nameSort = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        request.sortDescriptors = [inKitchenSort, nameSort]
+        
+        // create predicate to filter by category
+        let categoryPredicate = NSPredicate(format: "toCategory = %@", category)
+        request.predicate = categoryPredicate
+        
+        // create controller using ap delegate to retrieve context
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: ad.persistentContainer.viewContext, sectionNameKeyPath: "isInKitchen", cacheName: nil)
+        
+        do{
+            try fetchResultsController.performFetch()
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+        
+        return fetchResultsController
+    }
+    
     // FETCH CATEGORIES
     internal static func getCategories() -> NSFetchedResultsController<Category> {
         

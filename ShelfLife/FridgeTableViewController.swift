@@ -16,7 +16,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     var foodItems = [FoodItem]()
     var foodInKitchen = [FoodItem]()
-    var foodNotInKitchen = [FoodItem]()
+    var foodNotInKitchen: [FoodItem] = []
     let headerTitles = ["In my kitchen", "Not in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
 
@@ -252,7 +252,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         case.insert:
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
-                if tableView.indexPathForSelectedRow?.section == 0 {
+                if indexPath.section == 0 {
                     let foodItem = fetchResultsController.object(at: indexPath)
                     foodInKitchen.insert(foodItem, at: indexPath.row)
                 }
