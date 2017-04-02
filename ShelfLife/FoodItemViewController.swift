@@ -22,7 +22,11 @@ class FoodItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Set name and possible image
+        nameLabel.text = foodItem.name
+        if let data = foodItem.picture {
+            foodImageView.image = UIImage(data: data as Data)
+        }
     }
 
     override func didReceiveMemoryWarning() {

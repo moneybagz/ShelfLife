@@ -15,8 +15,8 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     var foodItems = [FoodItem]()
-    var foodItemsInFridge = [FoodItem]()
-    var foodItemsNotInFridge = [FoodItem]()
+    var foodInKitchen = [FoodItem]()
+    var foodNotInKitchen = [FoodItem]()
     let headerTitles = ["In my kitchen", "Not in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
 
@@ -46,6 +46,37 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Custom methods
+    
+    func getFreshnessWith(foodItem: FoodItem) -> UIColor {
+        
+        // Get total time between bought date and expiration date
+        let totalTime = foodItem.expDate?.timeIntervalSince(foodItem.boughtDate as! Date)
+        
+        // Get elapsed time between now and bought date
+        let now = Date()
+        let elapsedTime = now.timeIntervalSince(foodItem.boughtDate as! Date)
+        
+        // Compute the increase percentage
+        let percent:Int
+        let percentage = (elapsedTime) / (totalTime)! * 100
+        percent = Int(percentage)
+        
+        // Select color depending on increase percentage
+        switch percent {
+        case 0...50:
+            return UIColor.green
+        case 50...74:
+            return UIColor.yellow
+        case 75...87:
+            return UIColor.orange
+        case 88...99:
+            return UIColor.red
+        default:
+            return UIColor.brown
+        }
     }
     
     
@@ -99,15 +130,21 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         let foodItem = fetchResultsController.object(at: indexPath)
         
-        // Configure the cell...
-//        if indexPath.section == 0 {
-//            cell.foodItemLabel.text = foodItemsInFridge[indexPath.row].name
-//        }
-//        else {
-//            cell.foodItemLabel.text = foodItemsNotInFridge[indexPath.row].name
-//        }
+        // split FoodItems between two arrays for each section
+        if indexPath.section == 0 {
+            foodInKitchen.append(foodItem)
+        }
+        else {
+            foodNotInKitchen.append(foodItem)
+        }
         
+        // CELL NAME
         cell.foodItemLabel.text = foodItem.name
+        // CELL COLOR
+        if foodItem.boughtDate != nil && foodItem.expDate != nil {
+            cell.foodItemLabel.textColor = getFreshnessWith(foodItem: foodItem)
+        }
+        // CELL PICTURE
         if let data = foodItem.picture {
             cell.foodItemImage.image = UIImage(data: data as Data)
         }
@@ -239,13 +276,13 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
             if tableView.indexPathForSelectedRow?.section == 0 {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
-                    destinationVC.foodItem = foodItemsInFridge[index.row]
+                    destinationVC.foodItem = foodInKitchen[index.row]
                 }
             }
             else {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
-                    destinationVC.foodItem = foodItemsNotInFridge[index.row]
+                    destinationVC.foodItem = foodNotInKitchen[index.row]
                 }
             }
         }
