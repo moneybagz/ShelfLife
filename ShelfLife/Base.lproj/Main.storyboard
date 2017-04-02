@@ -340,7 +340,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.17254901959999999" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="freshBar" translatesAutoresizingMaskIntoConstraints="NO" id="qbx-N3-geL">
@@ -355,12 +355,13 @@
                         <outlet property="boughtDateLabel" destination="Pqp-KA-AfI" id="64N-1P-neT"/>
                         <outlet property="expDateLabel" destination="XAR-xl-P6g" id="Sww-oA-KBJ"/>
                         <outlet property="foodImageView" destination="R2w-vI-8y7" id="9IS-Q6-Sbz"/>
+                        <outlet property="freshBarImageView" destination="qbx-N3-geL" id="AFn-eg-0Gv"/>
                         <outlet property="nameLabel" destination="rMX-9y-lcR" id="RpR-Qv-yVz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0v-wN-r4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5868.75" y="-235"/>
+            <point key="canvasLocation" x="5868.115942028986" y="-235.59782608695653"/>
         </scene>
         <!--Kitchen-->
         <scene sceneID="2ro-lq-hG5">

@@ -67,15 +67,15 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Select color depending on increase percentage
         switch percent {
         case 0...50:
-            return UIColor.green
+            return UIColor(red: 26.0/255, green: 189.0/255, blue: 22.0/255, alpha: 1.0)
         case 50...74:
-            return UIColor.yellow
+            return UIColor(red: 237.0/255, green: 222.0/255, blue: 9.0/255, alpha: 1.0)
         case 75...87:
-            return UIColor.orange
+            return UIColor(red: 238.0/255, green: 150.0/255, blue: 10.0/255, alpha: 1.0)
         case 88...99:
-            return UIColor.red
+            return UIColor(red: 236.0/255, green: 56.0/255, blue: 9.0/255, alpha: 1.0)
         default:
-            return UIColor.brown
+            return UIColor(red: 83.0/255, green: 44.0/255, blue: 5.0/255, alpha: 1.0)
         }
     }
     
@@ -144,9 +144,15 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         if foodItem.boughtDate != nil && foodItem.expDate != nil {
             cell.foodItemLabel.textColor = getFreshnessWith(foodItem: foodItem)
         }
+        else {
+            cell.foodItemLabel.textColor = UIColor.black
+        }
         // CELL PICTURE
         if let data = foodItem.picture {
             cell.foodItemImage.image = UIImage(data: data as Data)
+        }
+        else {
+            cell.foodItemImage.image = nil
         }
         
         return cell
@@ -245,12 +251,28 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         {
         case.insert:
             if let indexPath = newIndexPath {
-                
                 tableView.insertRows(at: [indexPath], with: .fade)
+                if tableView.indexPathForSelectedRow?.section == 0 {
+                    let foodItem = fetchResultsController.object(at: indexPath)
+                    foodInKitchen.insert(foodItem, at: indexPath.row)
+                }
+                else {
+                    let foodItem = fetchResultsController.object(at: indexPath)
+                    foodNotInKitchen.insert(foodItem, at: indexPath.row)
+                }
             }
         case.delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                if indexPath.section == 0 {
+                    foodInKitchen.remove(at: indexPath.row)
+                    for food in foodInKitchen {
+                        print("\(food.name)")
+                    }
+                }
+                else {
+                    foodNotInKitchen.remove(at: indexPath.row)
+                }
             }
         case.update:
             if let indexPath = indexPath {
@@ -271,17 +293,20 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Send selected FoodItem to the next View Controller
+        // Send selected FoodItem and fresh color to the next View Controller
         if segue.identifier == "toFoodItemVC" {
             if tableView.indexPathForSelectedRow?.section == 0 {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
+                    let cell = tableView.cellForRow(at: index) as! FridgeTableViewCell
+                    destinationVC.nameColor = cell.foodItemLabel.textColor
                     destinationVC.foodItem = foodInKitchen[index.row]
                 }
             }
             else {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
+                    destinationVC.nameColor = UIColor.black
                     destinationVC.foodItem = foodNotInKitchen[index.row]
                 }
             }
