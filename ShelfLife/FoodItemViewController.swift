@@ -80,7 +80,7 @@ class FoodItemViewController: UIViewController {
         
         // create meter reading view line
         if percent >= 100 {
-            let freshCodeLine = UIView(frame: CGRect(x: 242, y: 0, width: 3, height: 46))
+            let freshCodeLine = UIView(frame: CGRect(x: 240, y: 0, width: 3, height: 46))
             freshCodeLine.backgroundColor = UIColor.black
             freshBarImageView.addSubview(freshCodeLine)
             freshBarImageView.bringSubview(toFront: foodImageView)

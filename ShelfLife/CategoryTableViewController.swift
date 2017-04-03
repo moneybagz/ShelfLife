@@ -168,7 +168,9 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "toFoodVC", sender: indexPath)
+    }
     // MARK: - Fetch Results Controller Delegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -230,21 +232,21 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Send selected FoodItem and fresh color to the next View Controller
-        if segue.identifier == "toFoodItemVC" {
-            if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
-                let destinationVC = segue.destination as! FoodItemViewController
-                if let index = tableView.indexPathForSelectedRow {
-                    let cell = tableView.cellForRow(at: index) as! FridgeTableViewCell
-                    destinationVC.nameColor = cell.foodItemLabel.textColor
-                    destinationVC.foodItem = foodInKitchen[index.row]
+        if segue.identifier == "toFoodVC" {
+            let destinationVC = segue.destination as! FoodItemViewController
+            if let index = tableView.indexPathForSelectedRow {
+                if index.section == 0 {
+                    if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
+                        let cell = tableView.cellForRow(at: index) as! FoodItemTableViewCell
+                        destinationVC.nameColor = cell.foodNameLabel.textColor
+                        destinationVC.foodItem = foodInKitchen[index.row]
+                    }
+                    else {
+                        destinationVC.nameColor = UIColor.black
+                        destinationVC.foodItem = foodNotInKitchen[index.row]
+                    }
                 }
-            }
-//            if tableView.indexPathForSelectedRow?.section == 0 {
-//                
-//            }
-            else {
-                let destinationVC = segue.destination as! FoodItemViewController
-                if let index = tableView.indexPathForSelectedRow {
+                if index.section == 1 {
                     destinationVC.nameColor = UIColor.black
                     destinationVC.foodItem = foodNotInKitchen[index.row]
                 }

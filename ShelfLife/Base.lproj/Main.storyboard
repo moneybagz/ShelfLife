@@ -451,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEh-9O-Hnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4828" y="-1314"/>
+            <point key="canvasLocation" x="5003" y="-1386"/>
         </scene>
         <!--Category-->
         <scene sceneID="9Mg-Vm-db6">
@@ -477,6 +477,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ZKU-JO-LQ2" kind="show" identifier="toFoodVC" id="B1x-l3-0i7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -496,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEq-sx-7cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5614" y="-1314"/>
+            <point key="canvasLocation" x="5868" y="-964"/>
         </scene>
         <!--Categories-->
         <scene sceneID="brG-sj-Ifk">
@@ -522,6 +525,7 @@
         <image name="freshBar" width="1333" height="333"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="B1x-l3-0i7"/>
         <segue reference="xyA-hh-50G"/>
     </inferredMetricsTieBreakers>
 </document>
