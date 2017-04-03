@@ -79,86 +79,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    
-    // MARK: - Table view data source
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if let sections = fetchResultsController.sections {
-            let currentSection = sections[section]
-            return currentSection.numberOfObjects
-        }
-        return 0
-        
-//        var count = 0
-//        //NOT YET
-////        foodItemsInFridge.removeAll()
-////        foodItemsNotInFridge.removeAll()
-//
-//        // Get number of items in each section using food's expiration bool
-//        if section == 0 {
-//            for foodItem in foodItems {
-//                if foodItem.expBool == true {
-//                    count += 1
-//                    foodItemsInFridge.append(foodItem)
-//                }
-//            }
-//        } else {
-//            for foodItem in foodItems {
-//                if foodItem.expBool == false {
-//                    count += 1
-//                    foodItemsNotInFridge.append(foodItem)
-//                }
-//            }
-//        }
-//        
-//        return count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return headerTitles[section]
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fridgeCell", for: indexPath) as! FridgeTableViewCell
-        
-        let foodItem = fetchResultsController.object(at: indexPath)
-        
-        // split FoodItems between two arrays for each section
-        if indexPath.section == 0 {
-            foodInKitchen.append(foodItem)
-        }
-        else {
-            foodNotInKitchen.append(foodItem)
-        }
-        
-        // CELL NAME
-        cell.foodItemLabel.text = foodItem.name
-        // CELL COLOR
-        if foodItem.boughtDate != nil && foodItem.expDate != nil {
-            cell.foodItemLabel.textColor = getFreshnessWith(foodItem: foodItem)
-        }
-        else {
-            cell.foodItemLabel.textColor = UIColor.black
-        }
-        // CELL PICTURE
-        if let data = foodItem.picture {
-            cell.foodItemImage.image = UIImage(data: data as Data)
-        }
-        else {
-            cell.foodItemImage.image = nil
-        }
-        
-        return cell
-    }
-    
-    
     func testData(){
         let foodItem1 = FoodItem(context: context)
         foodItem1.name = "cheese"
@@ -214,6 +134,91 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         ad.saveContext()
     }
+    
+    // MARK: - Table view data source
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if let sections = fetchResultsController.sections {
+            return sections.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let sections = fetchResultsController.sections {
+            let currentSection = sections[section]
+            return currentSection.numberOfObjects
+        }
+        return 0
+
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        // section 0 could have 2 different values "in kitchen"/ "not in kitchen"
+        if section == 0 {
+            if let foodItems = fetchResultsController.fetchedObjects {
+                let foodItem = foodItems.first
+                
+                if foodItem?.isInKitchen == true {
+                    return headerTitles[0]
+                }
+                else {
+                    return headerTitles[1]
+                }
+            }
+        }
+        // secton 1 can only have 1 value "not in kitchen"
+        else if section == 1 {
+            return headerTitles[1]
+        }
+        
+        return ""
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "fridgeCell", for: indexPath) as! FridgeTableViewCell
+        
+        let foodItem = fetchResultsController.object(at: indexPath)
+        
+        // split FoodItems between two arrays for each section
+        if indexPath.section == 0 {
+            // section 0 could have different values "in kitchen" / "not in kitchen"
+            if foodItem.isInKitchen == true {
+                foodInKitchen.append(foodItem)
+            }
+            else {
+                foodNotInKitchen.append(foodItem)
+            }
+        }
+        else {
+            foodNotInKitchen.append(foodItem)
+        }
+        
+        // CELL NAME
+        cell.foodItemLabel.text = foodItem.name
+        // CELL COLOR
+        if foodItem.boughtDate != nil && foodItem.expDate != nil {
+            cell.foodItemLabel.textColor = getFreshnessWith(foodItem: foodItem)
+        }
+        else {
+            cell.foodItemLabel.textColor = UIColor.black
+        }
+        // CELL PICTURE
+        if let data = foodItem.picture {
+            cell.foodItemImage.image = UIImage(data: data as Data)
+        }
+        else {
+            cell.foodItemImage.image = nil
+        }
+        
+        return cell
+    }
+    
+    
+   
     
     // MARK: - Table view delegate methods
     

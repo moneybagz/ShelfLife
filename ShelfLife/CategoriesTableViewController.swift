@@ -113,9 +113,10 @@ class CategoriesTableViewController: UIViewController, UITableViewDataSource, UI
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         case.update:
-            if let indexPath = indexPath {
-                tableView.cellForRow(at: indexPath)
-            }
+            //if let indexPath = indexPath {
+                //tableView.cellForRow(at: indexPath)
+            tableView.reloadData()
+            //}
         case.move:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)

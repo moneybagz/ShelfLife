@@ -15,12 +15,22 @@ class NewCategoryViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet var nameTextField: UITextField!
     
     
+    var categoryToEdit:Category?
     
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // If category is being edited
+        if let category = categoryToEdit {
+            if let data = category.picture {
+                categoryImageView.image = UIImage(data: data as Data)
+            }
+            nameTextField.text = category.name
+        }
 
+        // setup text field delegate
         nameTextField.delegate = self
     }
 
@@ -66,8 +76,16 @@ class NewCategoryViewController: UIViewController, UIImagePickerControllerDelega
             return
         }
         
-        // Build a NSManaged Object Category
-        let category = Category(context: context)
+        
+        var category:Category!
+        
+        // Build a NSManaged Object Category unless user is editing
+        if categoryToEdit == nil {
+            category = Category(context: context)
+        }
+        else {
+            category = categoryToEdit
+        }
         
         // NAME
         category.name = nameTextField.text

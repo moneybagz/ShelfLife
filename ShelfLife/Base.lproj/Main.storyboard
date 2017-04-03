@@ -212,7 +212,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Jb-jS-MVJ">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fridgeCell" id="MUK-KM-vj0" customClass="FridgeTableViewCell" customModule="ShelfLife" customModuleProvider="target">
@@ -259,7 +259,7 @@
                         <constraints>
                             <constraint firstItem="0Jb-jS-MVJ" firstAttribute="leading" secondItem="zfO-bC-6BJ" secondAttribute="leading" id="1R7-Jf-fFi"/>
                             <constraint firstAttribute="trailing" secondItem="0Jb-jS-MVJ" secondAttribute="trailing" id="HGb-HJ-ZVd"/>
-                            <constraint firstAttribute="bottom" secondItem="0Jb-jS-MVJ" secondAttribute="bottom" id="bUy-Vt-x4q"/>
+                            <constraint firstItem="6BC-tt-6Cx" firstAttribute="top" secondItem="0Jb-jS-MVJ" secondAttribute="bottom" id="OVj-4V-3iq"/>
                             <constraint firstItem="0Jb-jS-MVJ" firstAttribute="top" secondItem="ZKt-XR-mW9" secondAttribute="bottom" id="xnX-W5-tuG"/>
                         </constraints>
                     </view>
@@ -276,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7I7-nq-RQM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5004" y="124.58770614692655"/>
+            <point key="canvasLocation" x="5002.898550724638" y="123.91304347826087"/>
         </scene>
         <!--Shelf Life Item-->
         <scene sceneID="y4Z-l2-VXO">
@@ -451,9 +451,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEh-9O-Hnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4736" y="-1314"/>
+            <point key="canvasLocation" x="4828" y="-1314"/>
         </scene>
-        <!--Category Table View Controller-->
+        <!--Category-->
         <scene sceneID="9Mg-Vm-db6">
             <objects>
                 <viewController id="wEy-AR-jAq" customClass="CategoryTableViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
@@ -483,13 +483,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Category" id="3X4-4h-WEs">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="xgy-bg-PpI">
+                            <connections>
+                                <segue destination="WpR-Bh-LRj" kind="show" identifier="toEditCategory" id="xyA-hh-50G"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="DAL-ZM-YPP" id="YLg-CB-muP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEq-sx-7cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5473.913043478261" y="-1314.1304347826087"/>
+            <point key="canvasLocation" x="5614" y="-1314"/>
         </scene>
         <!--Categories-->
         <scene sceneID="brG-sj-Ifk">
@@ -514,4 +521,7 @@
     <resources>
         <image name="freshBar" width="1333" height="333"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xyA-hh-50G"/>
+    </inferredMetricsTieBreakers>
 </document>

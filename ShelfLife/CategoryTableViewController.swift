@@ -90,7 +90,25 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return headerTitles[section]
+        // section 0 could have 2 different values "in kitchen"/ "not in kitchen"
+        if section == 0 {
+            if let foodItems = fetchResultsController.fetchedObjects {
+                let foodItem = foodItems.first
+                
+                if foodItem?.isInKitchen == true {
+                    return headerTitles[0]
+                }
+                else {
+                    return headerTitles[1]
+                }
+            }
+        }
+            // secton 1 can only have 1 value "not in kitchen"
+        else if section == 1 {
+            return headerTitles[1]
+        }
+        
+        return ""
     }
     
     
@@ -101,7 +119,13 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         
         // split FoodItems between two arrays for each section
         if indexPath.section == 0 {
-            foodInKitchen.append(foodItem)
+            // section 0 could have different values "in kitchen" / "not in kitchen"
+            if foodItem.isInKitchen == true {
+                foodInKitchen.append(foodItem)
+            }
+            else {
+                foodNotInKitchen.append(foodItem)
+            }
         }
         else {
             foodNotInKitchen.append(foodItem)
@@ -207,7 +231,7 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Send selected FoodItem and fresh color to the next View Controller
         if segue.identifier == "toFoodItemVC" {
-            if tableView.indexPathForSelectedRow?.section == 0 {
+            if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
                     let cell = tableView.cellForRow(at: index) as! FridgeTableViewCell
@@ -215,6 +239,9 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
                     destinationVC.foodItem = foodInKitchen[index.row]
                 }
             }
+//            if tableView.indexPathForSelectedRow?.section == 0 {
+//                
+//            }
             else {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
@@ -222,6 +249,11 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
                     destinationVC.foodItem = foodNotInKitchen[index.row]
                 }
             }
+        }
+        // send category property to edit
+        else if segue.identifier == "toEditCategory" {
+            let destinationVC = segue.destination as! NewCategoryViewController
+            destinationVC.categoryToEdit = category
         }
     }
 
