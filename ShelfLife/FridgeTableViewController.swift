@@ -15,10 +15,16 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     var foodItems = [FoodItem]()
-    var foodInKitchen = [FoodItem]()
-    var foodNotInKitchen: [FoodItem] = []
+   // var foodInKitchen = [FoodItem]()
+   // var foodNotInKitchen: [FoodItem] = []
     let headerTitles = ["In my kitchen", "Not in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
+//    // help to show when section needs to be reinserted
+//    var inMyKitchenSectionDeleted:Bool = false
+//    var notInMyKitchenSectionDeleted:Bool = false
+//    // these bools prevent reinserting section after section was just reinserted
+//    var sectionOneReinsertedAfterZeroSections = false
+//    var sectionTwoReinsertedAfterZeroSections = false
 
     
     override func viewDidLoad() {
@@ -28,7 +34,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.dataSource = self
         
         
-        //testData()
+        testData()
         
         
         // WHY DOES THIS METHOD HAVE TO BE STATIC?
@@ -77,6 +83,10 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             return UIColor(red: 83.0/255, green: 44.0/255, blue: 5.0/255, alpha: 1.0)
         }
+    }
+    
+    func applicationDirectoryPath() -> String {
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String
     }
     
     func testData(){
@@ -147,6 +157,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let sections = fetchResultsController.sections {
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\(section)")
             let currentSection = sections[section]
             return currentSection.numberOfObjects
         }
@@ -183,19 +194,25 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         let foodItem = fetchResultsController.object(at: indexPath)
         
+        print(foodItem.name)
+        
+        
+        
         // split FoodItems between two arrays for each section
-        if indexPath.section == 0 {
-            // section 0 could have different values "in kitchen" / "not in kitchen"
-            if foodItem.isInKitchen == true {
-                foodInKitchen.append(foodItem)
-            }
-            else {
-                foodNotInKitchen.append(foodItem)
-            }
-        }
-        else {
-            foodNotInKitchen.append(foodItem)
-        }
+        //foodItem.isInKitchen ? foodInKitchen.insert(foodItem, at: indexPath.row) : foodNotInKitchen.insert(foodItem, at: indexPath.row)
+        
+//        if indexPath.section == 0 {
+//            // section 0 could have different values "in kitchen" / "not in kitchen"
+//            if foodItem.isInKitchen == true {
+//                foodInKitchen.append(foodItem)
+//            }
+//            else {
+//                foodNotInKitchen.append(foodItem)
+//            }
+//        }
+//        else {
+//            foodNotInKitchen.append(foodItem)
+//        }
         
         // CELL NAME
         cell.foodItemLabel.text = foodItem.name
@@ -237,6 +254,32 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        
+//        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Share", handler: {(action,indexPath) -> Void in
+//            
+////            let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name
+////            if let imageToShare = UIImage(data: self.restaurants[indexPath.row].image! as Data) {
+////                let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+////                self.present(activityController, animated: true, completion: nil)
+////            }
+//        })
+//        
+//        // Delete button
+//        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: {(action,indexPath) -> Void in
+//            
+//            // Delete the row from the tableview fetch Results Controller Delegate will handle the rest
+//            let foodItem = self.fetchResultsController.object(at: indexPath)
+//            context.delete(foodItem)
+//            ad.saveContext()
+//        })
+//        
+//        
+////        shareAction.backgroundColor = UIColor(colorLiteralRed: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
+////        deleteAction.backgroundColor = UIColor(colorLiteralRed: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
+//        
+//        return [deleteAction]
+//    }
     
     // MARK: - Fetch Results Controller Delegate
     
@@ -250,35 +293,269 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.endUpdates()
     }
     
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        
+        switch type {
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        default:
+            break
+        }
+    }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type
         {
         case.insert:
             if let indexPath = newIndexPath {
+//                
+//                print("&&&&&&&&&&&&&&&&&&&&&&&&&\(tableView.numberOfRows(inSection: indexPath.section))****************")
+//                
+//                // Insert correct section if section is missing then row
+//                if inMyKitchenSectionDeleted == true && notInMyKitchenSectionDeleted == false {
+//                    
+//                    tableView.insertSections(IndexSet(integer: 1), with: .fade)
+//                    tableView.insertRows(at: [indexPath], with: .fade)
+//                    inMyKitchenSectionDeleted = false
+//                    break
+//                }
+//                    
+//                else if inMyKitchenSectionDeleted == false && notInMyKitchenSectionDeleted == true {
+//                
+//                    
+//                    tableView.insertSections(IndexSet(integer: 1), with: .fade)
+//                    tableView.insertRows(at: [indexPath], with: .fade)
+//                    notInMyKitchenSectionDeleted = false
+//                    break
+//                }
+//                else if inMyKitchenSectionDeleted == true && notInMyKitchenSectionDeleted == true {
+//                    
+//                    //                    let foodItem = fetchResultsController.object(at: indexPath)
+//                    //                    if foodItem.isInKitchen == true {
+//                    
+//                    tableView.insertSections(IndexSet(integer: 0), with: .fade)
+//                    tableView.insertRows(at: [indexPath], with: .fade)
+//                    
+//                    // find out which section is back and set bool
+//                    let foodItem = fetchResultsController.object(at: indexPath)
+//                    
+//                    if foodItem.isInKitchen == true {
+//                        inMyKitchenSectionDeleted = false
+//                    }
+//                    else {
+//                        notInMyKitchenSectionDeleted = false
+//                    }
+//                    break
+//                    //                    }
+//                    //                    else {
+//                    //
+//                    //                        tableView.insertSections(IndexSet(integer: 1), with: .fade)
+//                    //                        tableView.insertRows(at: [indexPath], with: .fade)
+//                    //                        notInMyKitchenSectionDeleted = false
+//                    //                        break
+//                    //                    }
+//                }
+            
+            
+  
+                
+                // Insert jsut row
                 tableView.insertRows(at: [indexPath], with: .fade)
-                if indexPath.section == 0 {
-                    let foodItem = fetchResultsController.object(at: indexPath)
-                    foodInKitchen.insert(foodItem, at: indexPath.row)
-                }
-                else {
-                    let foodItem = fetchResultsController.object(at: indexPath)
-                    foodNotInKitchen.insert(foodItem, at: indexPath.row)
-                }
             }
+            
+            
+//                let rows = tableView.numberOfRows(inSection: indexPath.section)
+//                print("&&&&&&&&&&&&&&&\(rows)@@@@@@@@@@@@@")
+//                if tableView.numberOfRows(inSection: indexPath.section) > 1 {
+//                    if tableView.headerView(forSection: indexPath.section)?.textLabel?.text == "In my kitchen" {
+//                        
+//                        tableView.insertSections(IndexSet(integer: 0), with: .fade)
+//                        tableView.insertRows(at: [indexPath], with: .fade)
+//                        
+//                        break
+//                    }
+//                    else {
+//                        
+//                        tableView.insertSections(IndexSet(integer: 1), with: .fade)
+//                        tableView.insertRows(at: [indexPath], with: .fade)
+//                        
+//                        break
+//                    }
+//                }
+//                tableView.insertRows(at: [indexPath], with: .fade)
+//                
+//                break
+//            }
+            
+//            // Cell for row is after this so no need to add foodItem to VC arrays
+//            // Insert just row? or insert secton then row
+//            if let indexPath = newIndexPath {
+//                
+//                // Get food item to bool
+//                let foodItem = fetchResultsController.object(at: indexPath)
+//                // Are there 0 sections ?
+//                if let sections = fetchResultsController.sections {
+//                    // If there is one section figure out if section for foodItem exists or not. If not create it before inserting row
+//                    if sections.count == 1 {
+//                        if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
+//                            if foodItem.isInKitchen == false {
+//                                tableView.insertSections(IndexSet(integer: 1), with: .fade)
+//                                tableView.insertRows(at: [indexPath], with: .fade)
+//                               
+//                                break
+//                                
+//                            }
+//                            else {
+//                                tableView.insertRows(at: [indexPath], with: .fade)
+//                       
+//                                break
+//                                
+//                            }
+//                        }
+//                        else {
+//                            if foodItem.isInKitchen == true {
+//                                tableView.insertSections(IndexSet(integer: 1), with: .fade)
+//                                tableView.insertRows(at: [indexPath], with: .fade)
+//                           
+//                                break
+//                                
+//                            }
+//                            else {
+//                                tableView.insertRows(at: [indexPath], with: .fade)
+//                                
+////                                foodItem.isInKitchen ? foodInKitchen.insert(foodItem, at: indexPath.row) : foodNotInKitchen.insert(foodItem, at: indexPath.row)
+//                                
+//                                break
+//                                
+//                            }
+//                        }
+//                    }
+//                    // If there are two sections insertion is simple
+//                    else if sections.count == 2 {
+//                        tableView.insertRows(at: [indexPath], with: .fade)
+//                        
+//                        break
+//                        
+//                    }
+//                }
+//                // if there are no sections, create section before insertion
+//                else {
+//                    tableView.insertSections(IndexSet(integer: 0), with: .fade)
+//                    tableView.insertRows(at: [indexPath], with: .fade)
+//
+//                    break
+//                }
+//            }
+            
+                
+//            if let indexPath = newIndexPath {
+//
+//                tableView.insertRows(at: [indexPath], with: .fade)
+//                if indexPath.section == 0 {
+//                    if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
+//                        let foodItem = fetchResultsController.object(at: indexPath)
+//                        foodInKitchen.insert(foodItem, at: indexPath.row)
+//                    }
+//                    else {
+//                        let foodItem = fetchResultsController.object(at: indexPath)
+//                        foodNotInKitchen.insert(foodItem, at: indexPath.row)
+//                    }
+//                }
+//                else {
+//                    let foodItem = fetchResultsController.object(at: indexPath)
+//                    foodNotInKitchen.insert(foodItem, at: indexPath.row)
+//                }
+//            }
+ 
+        
+//            if let indexPath = newIndexPath {
+//                tableView.insertRows(at: [indexPath], with: .fade)
+//                if indexPath.section == 0 {
+//                    let foodItem = fetchResultsController.object(at: indexPath)
+//                    foodInKitchen.insert(foodItem, at: indexPath.row)
+//                }
+//                else {
+//                    let foodItem = fetchResultsController.object(at: indexPath)
+//                    foodNotInKitchen.insert(foodItem, at: indexPath.row)
+//                }
+//            }
         case.delete:
             if let indexPath = indexPath {
+//                let section = indexPath.section
+//                
+//                if tableView.numberOfRows(inSection: section) == 1 {
+//                    if tableView.headerView(forSection: section)?.textLabel?.text == "In my kitchen" || inMyKitchenSectionDeleted == true {
+//                        tableView.deleteRows(at: [indexPath], with: .fade)
+//                        tableView.deleteSections(IndexSet(integer: 0), with: .fade)
+//                        inMyKitchenSectionDeleted = true
+//                        
+//                        break
+//                    }
+//                    else {
+//                        tableView.deleteRows(at: [indexPath], with: .fade)
+//                        tableView.deleteSections(IndexSet(integer: 1), with: .fade)
+//                        notInMyKitchenSectionDeleted = true
+//                        
+//                        break
+//                    }
+//
+//                }
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                if indexPath.section == 0 {
-                    foodInKitchen.remove(at: indexPath.row)
-                    for food in foodInKitchen {
-                        print("\(food.name)")
-                    }
-                }
-                else {
-                    foodNotInKitchen.remove(at: indexPath.row)
-                }
             }
+            
+//                //Empty VC arrays (will be refilled during "cell for row" method)
+//                
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//                if indexPath.section == 0 {
+//                    if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
+//                        // Remove section if array count will go to zero
+////                        print("^^^^^^^^^^^^^\(foodInKitchen.count)")
+//                        
+//                        if tableView.numberOfRows(inSection: 0) == 1 {
+//                            tableView.deleteSections(IndexSet(integer: 0), with: .fade)
+//                        }
+//                        // Update array properties so correct property is segued
+//                        foodInKitchen.remove(at: indexPath.row)
+//                        
+//                        break
+//                    }
+//                    else {
+//                        if foodNotInKitchen.count == 1 {
+//                            tableView.deleteSections(IndexSet(integer: 0), with: .fade)
+//                        }
+//                        foodNotInKitchen.remove(at: indexPath.row)
+//                        
+//                        break
+//                    }
+//                }
+//                else {
+//                    if foodNotInKitchen.count == 1 {
+//                        tableView.deleteSections(IndexSet(integer: 1), with: .fade)
+//                    }
+//                    foodNotInKitchen.remove(at: indexPath.row)
+//                    
+//                    break
+//                }
+//            }
+        
+//            if let indexPath = indexPath {
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//                if indexPath.section == 0 {
+//                    foodInKitchen.remove(at: indexPath.row)
+//                    for food in foodInKitchen {
+//                        print("\(food.name)")
+//                    }
+//                }
+//                else {
+//                    if foodNotInKitchen.count == 1 {
+//                        tableView.deleteSections(IndexSet(integer: 1), with: .fade)
+//                    }
+//                    foodNotInKitchen.remove(at: indexPath.row)
+//                }
+//            }
         case.update:
             if let indexPath = indexPath {
                 tableView.cellForRow(at: indexPath)
@@ -300,19 +577,20 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Send selected FoodItem and fresh color to the next View Controller
         if segue.identifier == "toFoodItemVC" {
+            
             if tableView.indexPathForSelectedRow?.section == 0 {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
                     let cell = tableView.cellForRow(at: index) as! FridgeTableViewCell
                     destinationVC.nameColor = cell.foodItemLabel.textColor
-                    destinationVC.foodItem = foodInKitchen[index.row]
+                    destinationVC.foodItem = fetchResultsController.object(at: index)
                 }
             }
             else {
                 let destinationVC = segue.destination as! FoodItemViewController
                 if let index = tableView.indexPathForSelectedRow {
                     destinationVC.nameColor = UIColor.black
-                    destinationVC.foodItem = foodNotInKitchen[index.row]
+                    destinationVC.foodItem = fetchResultsController.object(at: index)
                 }
             }
         }

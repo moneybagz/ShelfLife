@@ -24,6 +24,9 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup navigation bar title
+        self.navigationItem.title = category.name
+        
         // Setup tableView delegates
         tableView.delegate = self
         tableView.dataSource = self
@@ -203,12 +206,25 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 if indexPath.section == 0 {
-                    foodInKitchen.remove(at: indexPath.row)
-                    for food in foodInKitchen {
-                        print("\(food.name)")
+                    if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
+                        // Remove section if array count will go to zero
+                        if foodInKitchen.count == 1 {
+                            tableView.deleteSections(IndexSet(integer: 0), with: .fade)
+                        }
+                        // Update array properties so correct property is segued
+                        foodInKitchen.remove(at: indexPath.row)
+                    }
+                    else {
+                        if foodNotInKitchen.count == 1 {
+                            tableView.deleteSections(IndexSet(integer: 0), with: .fade)
+                        }
+                        foodNotInKitchen.remove(at: indexPath.row)
                     }
                 }
                 else {
+                    if foodNotInKitchen.count == 1 {
+                        tableView.deleteSections(IndexSet(integer: 1), with: .fade)
+                    }
                     foodNotInKitchen.remove(at: indexPath.row)
                 }
             }
