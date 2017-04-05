@@ -8,11 +8,12 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
-class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, AVCaptureMetadataOutputObjectsDelegate {
 
-    @IBOutlet var tableView: UITableView!
-    
+    @IBOutlet var tableView: UITableView!    
+    @IBOutlet var leftBarButtonItem: UIBarButtonItem!
     
     var foodItems = [FoodItem]()
    // var foodInKitchen = [FoodItem]()
@@ -25,16 +26,27 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
 //    // these bools prevent reinserting section after section was just reinserted
 //    var sectionOneReinsertedAfterZeroSections = false
 //    var sectionTwoReinsertedAfterZeroSections = false
+    var foodItemToSend:FoodItem?
+    
+    // Properties for AVCapture Metadata Output Object Delegate
+    var captureSession:AVCaptureSession?
+    var videoPreviewLayer:AVCaptureVideoPreviewLayer?
+    var barCodeFrameView:UIView?
+    var barCode:Int?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Setup left bar button item barcode
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "barcode"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.barcodeButtonPressed(_:)))
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         
-        testData()
+        //testData()
         
         
         // WHY DOES THIS METHOD HAVE TO BE STATIC?
@@ -569,7 +581,160 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
+    
+    // MARK: - UAVCapture Metadata Output Objects Delegate
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+        
+        // Check if the metadataObjects array is not nil and it contains at least one object
+        if metadataObjects == nil || metadataObjects.count == 0 {
+            barCodeFrameView?.frame = .zero
+            
+            return
+        }
+        
+        // Get the metadata object
+        let metaDataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+        // If the found metadata is equal to the barcode metadata then update the set the bounds (Green Laser Thingy) save barcode and end session
+        if metaDataObj.type == AVMetadataObjectTypeEAN13Code {
+            
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+            barCodeFrameView?.frame = barCodeObject!.bounds
+            
+            if metaDataObj.stringValue != nil {
+                let barcodeString = metaDataObj.stringValue
+                barCode = Int(barcodeString!)
+                //print("!!!!!!!!!!!!!!!!EAN13 \(barCode) !!!!!!!!!!!!!!!!!!")
+                
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkForMatchingBarcode), userInfo: nil, repeats: false)
+            }
+        }
+        
+        if metaDataObj.type == AVMetadataObjectTypeEAN8Code {
+            
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+            barCodeFrameView?.frame = barCodeObject!.bounds
+            
+            if metaDataObj.stringValue != nil {
+                let barcodeString = metaDataObj.stringValue
+                barCode = Int(barcodeString!)
+                //print("!!!!!!!!!!!!!!!! \(barCode) !!!!!!!!!!!!!!!!!!")
+                
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkForMatchingBarcode), userInfo: nil, repeats: false)
+            }
+        }
+        
+        //        if metaDataObj.type == AVMetadataObjectTypeUPCECode {
+        //
+        //            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metaDataObj)
+        //            barCodeFrameView?.frame = barCodeObject!.bounds
+        //
+        //            if metaDataObj.stringValue != nil {
+        //                //messageLabel.text = metaDataObj.stringValue
+        //                captureSession?.stopRunning()
+        //            }
+        //        }
+    }
+    
+    func checkForMatchingBarcode () {
+        
+        if let foodItems = fetchResultsController.fetchedObjects {
+            
+            // Loop through all food items to find matching barcode
+            for foodItem in foodItems {
+                if foodItem.barcode == Int64(barCode!) {
+                    
+                    foodItemToSend = foodItem
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "vc") as! ExpDateViewController
+                    vc.foodItem = foodItem
+                    //let vc = ExpDateViewController()
+                    self.present(vc, animated: true, completion: nil)
+                    return
+                }
+            }
+            // If no matching barcode is found send alert message
+            let alertController = UIAlertController(title: "CANNOT SAVE", message: "you have not registered this barcode yet. Create new item and scan barcode", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        // If user has no food items in their database send alert message
+        let alertController = UIAlertController(title: "CANNOT SAVE", message: "you must create your food items before scanning", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+        
+        return
+    }
+    
+    
 
+    // MARK: - Actions
+    // For programmatic back button
+    @IBAction func backAction(_ sender: UIButton) {
+        
+        // Turn off camera and scanner
+        captureSession?.stopRunning()
+        barCodeFrameView?.removeFromSuperview()
+        videoPreviewLayer?.removeFromSuperlayer()
+        
+        // Setup left bar button item
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "barcode"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.barcodeButtonPressed(_:)))
+    }
+    
+    @IBAction func barcodeButtonPressed(_ sender: Any) {
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backButton"), style: .plain, target: self, action: #selector(self.backAction(_:)))
+        
+        // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
+        // as the media type parameter.
+        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        do {
+            // Get an instance of the AVCaptureDeviceInput class using previous device object
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            
+            // Initialize the captureSession object
+            captureSession = AVCaptureSession()
+            // Set the input device on the capture captureSession
+            captureSession?.addInput(input)
+            
+        } catch {
+            print(error)
+            return
+        }
+        
+        // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
+        let captureMetadataOutput = AVCaptureMetadataOutput()
+        captureSession?.addOutput(captureMetadataOutput)
+        
+        // Set delegate and use the default queue to execute the call back
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        captureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeUPCECode]
+        
+        // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        videoPreviewLayer?.frame = view.layer.bounds
+        view.layer.addSublayer(videoPreviewLayer!)
+        
+        // Start video capture.
+        captureSession?.startRunning()
+        
+        // Move the message label to the top view
+        //        view.bringSubview(toFront: messageLabel)
+        
+        // Initialize QR Code Frame to highlight the QR code
+        barCodeFrameView = UIView()
+        if let barCodeFrameView = barCodeFrameView {
+            barCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            barCodeFrameView.layer.borderWidth = 2
+            view.addSubview(barCodeFrameView)
+            view.bringSubview(toFront: barCodeFrameView)
+        }
+    }
     
     // MARK: - Navigation
 
@@ -594,6 +759,12 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
+//        else if segue.identifier == "toExpDateVC" {
+//            
+//            let destinationVC = segue.destination as! ExpDateViewController
+//            destinationVC.foodItem = foodItemToSend
+//            
+//        }
     }
  
 

@@ -29,6 +29,7 @@
 		537B1E731E917FEB00C08547 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E721E917FEB00C08547 /* CategoryTableViewController.swift */; };
 		537B1E751E91918800C08547 /* FoodItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 537B1E741E91918800C08547 /* FoodItemTableViewCell.xib */; };
 		537B1E771E9195B000C08547 /* FoodItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E761E9195B000C08547 /* FoodItemTableViewCell.swift */; };
+		537B1E791E94776C00C08547 /* ExpDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B1E781E94776B00C08547 /* ExpDateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		537B1E721E917FEB00C08547 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		537B1E741E91918800C08547 /* FoodItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodItemTableViewCell.xib; sourceTree = "<group>"; };
 		537B1E761E9195B000C08547 /* FoodItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemTableViewCell.swift; sourceTree = "<group>"; };
+		537B1E781E94776B00C08547 /* ExpDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpDateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				537B1E2C1E8C7E5D00C08547 /* CategoriesTableViewController.swift */,
 				537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */,
 				537B1E181E8C591D00C08547 /* NewFoodItemViewController.swift */,
+				537B1E781E94776B00C08547 /* ExpDateViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				537B1E651E8EF2AC00C08547 /* Recipe+CoreDataProperties.swift in Sources */,
 				537B1E6D1E8F7A3D00C08547 /* NewCategoryViewController.swift in Sources */,
 				537B1E671E8EF2AC00C08547 /* Category+CoreDataProperties.swift in Sources */,
+				537B1E791E94776C00C08547 /* ExpDateViewController.swift in Sources */,
 				537B1E691E8EF2AC00C08547 /* FoodItem+CoreDataProperties.swift in Sources */,
 				537B1DE11E89C04B00C08547 /* AppDelegate.swift in Sources */,
 				537B1E191E8C591E00C08547 /* NewFoodItemViewController.swift in Sources */,

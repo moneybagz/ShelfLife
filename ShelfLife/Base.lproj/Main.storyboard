@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -264,7 +265,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shelf Life" id="Yay-HM-hCZ">
-                        <barButtonItem key="leftBarButtonItem" image="barcode" id="yqs-rH-Q5k"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Znd-IN-Nxz">
                             <connections>
                                 <segue destination="U6A-Jl-7cL" kind="show" id="UNr-qd-q28"/>
@@ -273,6 +273,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="0Jb-jS-MVJ" id="j1h-aH-Z4g"/>
+                        <segue destination="xRM-A9-bxO" kind="presentation" identifier="toExpDateVC" id="JiC-0r-Wzt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7I7-nq-RQM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -384,6 +385,58 @@
             </objects>
             <point key="canvasLocation" x="4177" y="125"/>
         </scene>
+        <!--Exp Date View Controller-->
+        <scene sceneID="mcD-qZ-gBV">
+            <objects>
+                <viewController storyboardIdentifier="vc" id="xRM-A9-bxO" customClass="ExpDateViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MDV-ik-oeA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mp7-xA-BLg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VgK-8z-ifl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="wEl-Am-Dkc">
+                                <rect key="frame" x="0.0" y="28" width="414" height="368"/>
+                                <date key="date" timeIntervalSinceReferenceDate="512372642.85917598">
+                                    <!--2017-03-28 05:44:02 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePickerChanged:" destination="U6A-Jl-7cL" eventType="valueChanged" id="iEp-m1-Pov"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TnD-N0-D1J">
+                                <rect key="frame" x="167" y="416" width="80" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="deF-1O-tYG"/>
+                                    <constraint firstAttribute="width" constant="80" id="xzd-pD-A7n"/>
+                                </constraints>
+                                <state key="normal" title="SAVE"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="xRM-A9-bxO" eventType="touchUpInside" id="LiT-RK-Vp7"/>
+                                    <action selector="saveButtonPressed:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="YTD-eB-ZLA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wEl-Am-Dkc" firstAttribute="leading" secondItem="VgK-8z-ifl" secondAttribute="leading" id="2EE-75-YD2"/>
+                            <constraint firstItem="wEl-Am-Dkc" firstAttribute="top" secondItem="MDV-ik-oeA" secondAttribute="bottom" constant="8" id="DsX-sK-clB"/>
+                            <constraint firstAttribute="trailing" secondItem="wEl-Am-Dkc" secondAttribute="trailing" id="MGs-bJ-J70"/>
+                            <constraint firstItem="wEl-Am-Dkc" firstAttribute="height" secondItem="VgK-8z-ifl" secondAttribute="height" multiplier="0.5" id="bcJ-z5-xHG"/>
+                            <constraint firstItem="TnD-N0-D1J" firstAttribute="top" secondItem="wEl-Am-Dkc" secondAttribute="bottom" constant="20" id="fo5-bV-JjT"/>
+                            <constraint firstItem="TnD-N0-D1J" firstAttribute="centerX" secondItem="VgK-8z-ifl" secondAttribute="centerX" id="kBR-TV-ka7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="expDatePicker" destination="wEl-Am-Dkc" id="1ry-ZX-SbF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LNB-yN-ldP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4556.521739130435" y="840.48913043478262"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ccy-Di-zky">
             <objects>
@@ -452,7 +505,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEh-9O-Hnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5003" y="-1386"/>
+            <point key="canvasLocation" x="5003" y="-1359"/>
         </scene>
         <!--Category-->
         <scene sceneID="9Mg-Vm-db6">
@@ -523,7 +576,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="barcode" width="29" height="29"/>
         <image name="freshBar" width="1333" height="333"/>
     </resources>
     <inferredMetricsTieBreakers>
