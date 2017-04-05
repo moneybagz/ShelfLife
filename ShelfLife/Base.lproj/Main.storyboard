@@ -264,6 +264,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shelf Life" id="Yay-HM-hCZ">
+                        <barButtonItem key="leftBarButtonItem" image="barcode" id="yqs-rH-Q5k"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Znd-IN-Nxz">
                             <connections>
                                 <segue destination="U6A-Jl-7cL" kind="show" id="UNr-qd-q28"/>
@@ -522,10 +523,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="barcode" width="29" height="29"/>
         <image name="freshBar" width="1333" height="333"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B1x-l3-0i7"/>
-        <segue reference="xyA-hh-50G"/>
+        <segue reference="pzo-tD-wMY"/>
+        <segue reference="iBn-NK-nLI"/>
     </inferredMetricsTieBreakers>
 </document>
