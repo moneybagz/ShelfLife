@@ -26,7 +26,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
 //    // these bools prevent reinserting section after section was just reinserted
 //    var sectionOneReinsertedAfterZeroSections = false
 //    var sectionTwoReinsertedAfterZeroSections = false
-    var foodItemToSend:FoodItem?
     
     // Properties for AVCapture Metadata Output Object Delegate
     var captureSession:AVCaptureSession?
@@ -169,7 +168,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let sections = fetchResultsController.sections {
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\(section)")
             let currentSection = sections[section]
             return currentSection.numberOfObjects
         }
@@ -229,7 +227,8 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         // CELL NAME
         cell.foodItemLabel.text = foodItem.name
         // CELL COLOR
-        if foodItem.boughtDate != nil && foodItem.expDate != nil {
+        //if foodItem.boughtDate != nil && foodItem.expDate != nil {
+        if indexPath.section != 1 {
             cell.foodItemLabel.textColor = getFreshnessWith(foodItem: foodItem)
         }
         else {
@@ -266,32 +265,46 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        
-//        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Share", handler: {(action,indexPath) -> Void in
-//            
-////            let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name
-////            if let imageToShare = UIImage(data: self.restaurants[indexPath.row].image! as Data) {
-////                let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
-////                self.present(activityController, animated: true, completion: nil)
-////            }
-//        })
-//        
-//        // Delete button
-//        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: {(action,indexPath) -> Void in
-//            
-//            // Delete the row from the tableview fetch Results Controller Delegate will handle the rest
-//            let foodItem = self.fetchResultsController.object(at: indexPath)
-//            context.delete(foodItem)
-//            ad.saveContext()
-//        })
-//        
-//        
-////        shareAction.backgroundColor = UIColor(colorLiteralRed: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
-////        deleteAction.backgroundColor = UIColor(colorLiteralRed: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
-//        
-//        return [deleteAction]
-//    }
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        // Add New Button
+        let addAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Add New", handler: {(action,indexPath) -> Void in
+            
+            // get view controller to segue ready
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "vc") as! ExpDateViewController
+            
+            // fill new vc property with food item at selected index
+            vc.foodItem = self.fetchResultsController.object(at: indexPath)
+            
+            // segue to ExpDateViewController
+            self.present(vc, animated: true, completion: nil)
+            
+        })
+        
+        // Delete button
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Remove", handler: {(action,indexPath) -> Void in
+            
+            // If food Item is "in kitchen" transfer is to "not in kitchen" section
+            if indexPath.section == 0 {
+                let foodItem = self.fetchResultsController.object(at: indexPath)
+                foodItem.isInKitchen = false
+                self.tableView.reloadData()
+            }
+            else {
+                // Delete the row from the tableview fetch Results Controller Delegate will handle the rest
+                let foodItem = self.fetchResultsController.object(at: indexPath)
+                context.delete(foodItem)
+                ad.saveContext()
+            }
+            
+        })
+        
+        
+        addAction.backgroundColor = UIColor(colorLiteralRed: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
+//        deleteAction.backgroundColor = UIColor(colorLiteralRed: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
+        
+        return [deleteAction, addAction]
+    }
     
     // MARK: - Fetch Results Controller Delegate
     
@@ -644,7 +657,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
             for foodItem in foodItems {
                 if foodItem.barcode == Int64(barCode!) {
                     
-                    foodItemToSend = foodItem
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "vc") as! ExpDateViewController
                     vc.foodItem = foodItem
                     //let vc = ExpDateViewController()
@@ -759,12 +771,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
-//        else if segue.identifier == "toExpDateVC" {
-//            
-//            let destinationVC = segue.destination as! ExpDateViewController
-//            destinationVC.foodItem = foodItemToSend
-//            
-//        }
     }
  
 

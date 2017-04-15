@@ -61,13 +61,19 @@ class ExpDateViewController: UIViewController {
         // BARCODE
         foodItemToSave.barcode = foodItem.barcode
         // IsInKITCHEN BOOL
-        foodItemToSave.isInKitchen = foodItem.isInKitchen
+        foodItemToSave.isInKitchen = true
         // BOUGHT DATE
-        foodItemToSave.boughtDate = foodItem.boughtDate
+        foodItemToSave.boughtDate = Date() as NSDate?
         // EXP DATE
-        foodItemToSave.expDate = foodItem.expDate
+        foodItemToSave.expDate = expDate as NSDate
         // QUANTITY
         foodItemToSave.quantity = foodItem.quantity
+        
+        
+        // Delete "not in kitchen" item when creating a new one
+        if foodItem.isInKitchen == false {
+            context.delete(foodItem)
+        }
 
         ad.saveContext()
         self.dismiss(animated: true, completion: nil)
