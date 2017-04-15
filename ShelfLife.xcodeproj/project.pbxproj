@@ -107,13 +107,13 @@
 		537B1DF71E89C15100C08547 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				537B1E721E917FEB00C08547 /* CategoryTableViewController.swift */,
-				537B1E6E1E904E5500C08547 /* FoodItemViewController.swift */,
-				537B1E6C1E8F7A3D00C08547 /* NewCategoryViewController.swift */,
 				537B1E2C1E8C7E5D00C08547 /* CategoriesTableViewController.swift */,
-				537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */,
+				537B1E721E917FEB00C08547 /* CategoryTableViewController.swift */,
+				537B1E6C1E8F7A3D00C08547 /* NewCategoryViewController.swift */,
+				537B1E6E1E904E5500C08547 /* FoodItemViewController.swift */,
 				537B1E181E8C591D00C08547 /* NewFoodItemViewController.swift */,
 				537B1E781E94776B00C08547 /* ExpDateViewController.swift */,
+				537B1E141E89DB5400C08547 /* FridgeTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

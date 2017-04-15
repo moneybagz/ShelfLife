@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fbu-D4-mrb">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fbu-D4-mrb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -353,7 +353,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Shelf Life Item" id="Lsl-iY-dn5"/>
+                    <navigationItem key="navigationItem" title="Shelf Life Item" id="Lsl-iY-dn5">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="9rz-8U-oQP">
+                            <connections>
+                                <segue destination="U6A-Jl-7cL" kind="show" identifier="toEditFoodItem" id="crH-zn-P5L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="boughtDateLabel" destination="Pqp-KA-AfI" id="64N-1P-neT"/>
                         <outlet property="expDateLabel" destination="XAR-xl-P6g" id="Sww-oA-KBJ"/>
@@ -581,5 +587,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="pzo-tD-wMY"/>
         <segue reference="iBn-NK-nLI"/>
+        <segue reference="crH-zn-P5L"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -29,6 +29,8 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
     var imageIsEdited = false
     var fetchResultsController: NSFetchedResultsController<Category>!
     
+    var foodItemToEdit: FoodItem?
+    
     // Properties for AVCapture Metadata Output Object Delegate
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
@@ -78,6 +80,38 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         if imageIsEdited == false {
             if let foodImage = UIImage(data: categories?.first?.picture as! Data) {
                 foodImageView.image = foodImage
+            }
+        }
+        
+        // setup UI for EDITING
+        if foodItemToEdit != nil {
+            
+            // setup category picker for editing
+            if categories != nil {
+                for category in categories! {
+                    
+                    if foodItemToEdit?.toCategory == category {
+                        let index = categories?.index(of: category)
+                        foodCategoryPicker.selectRow(index!, inComponent: 0, animated: true)
+                        foodImageView.image = UIImage(data: category.picture as! Data)
+                    }
+                }
+            }
+            // set up textfields, segmentcontrol and datePicker
+            nameTextField.text = foodItemToEdit?.name
+            
+            if foodItemToEdit?.isInKitchen == true {
+                isBoughtSegmentControl.selectedSegmentIndex = 1
+                
+                quantityTextField.isHidden = false
+                expDatePicker.isHidden = false
+                quantityLabel.isHidden = false
+                
+                quantityTextField.text = "\(foodItemToEdit?.quantity ?? 1)"
+                
+                if foodItemToEdit?.expDate as! Date > Date() {
+                    expDatePicker.date = foodItemToEdit?.expDate as! Date
+                }
             }
         }
     }
@@ -206,9 +240,19 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         if isBoughtSegmentControl.selectedSegmentIndex == 1 {
             // Compare Bought date to exp date, make sure they are different
             // Components for Bought date
+
             let date = Date()
             let units: Set<Calendar.Component> = [.day, .month, .year]
-            let components = Calendar.current.dateComponents(units, from: date)
+            
+            // Before creating new components make check if you are editing
+            let components:DateComponents!
+            
+            if foodItemToEdit == nil {
+                components = Calendar.current.dateComponents(units, from: date)
+            }
+            else {
+                components = Calendar.current.dateComponents(units, from: foodItemToEdit?.boughtDate as! Date)
+            }
             
             // Components for exp date
             let expDate = expDatePicker.date
@@ -223,14 +267,25 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
                 return
             }
             
+            
             // User cannot leave quantity textfield without number
             if quantityTextField.text == "" {
                 quantityTextField.text = "1"
             }
         }
         
-        // Build a NSManaged Object FoodItem
-        let foodItem = FoodItem(context: context)
+        
+        
+        var foodItem:FoodItem!
+        
+        // Build a NSManaged Object FoodItem unless user is editing
+        if foodItemToEdit == nil {
+            foodItem = FoodItem(context: context)
+        }
+        else {
+            // FoodItem is an object not a struct so this assignment is ok
+            foodItem = foodItemToEdit
+        }
         
         // NAME
         foodItem.name = nameTextField.text
@@ -249,7 +304,9 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         foodItem.isInKitchen = isBoughtSegmentControl.selectedSegmentIndex == 0 ? false : true
         if foodItem.isInKitchen == true {
             // BOUGHT DATE
-            foodItem.boughtDate = Date() as NSDate?
+            if foodItemToEdit == nil {
+                foodItem.boughtDate = Date() as NSDate?
+            }
             // EXP DATE
             foodItem.expDate = expDatePicker.date as NSDate?
             // QUANTITY

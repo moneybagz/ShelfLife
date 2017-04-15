@@ -19,14 +19,24 @@ class FoodItemViewController: UIViewController {
     
     var foodItem:FoodItem!
     var nameColor:UIColor!
+    var freshCodeLine:UIView?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // No old meter readings
+        freshCodeLine?.removeFromSuperview()
+        
         // Fresh Color
         nameLabel.textColor = nameColor
-
+        
         // Set name and possible image
         nameLabel.text = foodItem.name
         if let data = foodItem.picture {
@@ -80,28 +90,30 @@ class FoodItemViewController: UIViewController {
         
         // create meter reading view line
         if percent >= 100 {
-            let freshCodeLine = UIView(frame: CGRect(x: 240, y: 0, width: 3, height: 46))
-            freshCodeLine.backgroundColor = UIColor.black
-            freshBarImageView.addSubview(freshCodeLine)
+            freshCodeLine = UIView(frame: CGRect(x: 240, y: 0, width: 3, height: 46))
+            freshCodeLine?.backgroundColor = UIColor.black
+            freshBarImageView.addSubview(freshCodeLine!)
             freshBarImageView.bringSubview(toFront: foodImageView)
         }
         else {
-            let freshCodeLine = UIView(frame: CGRect(x: percent * 2 + 14, y: 0, width: 3, height: 46))
-            freshCodeLine.backgroundColor = UIColor.black
-            freshBarImageView.addSubview(freshCodeLine)
+            freshCodeLine = UIView(frame: CGRect(x: percent * 2 + 14, y: 0, width: 3, height: 46))
+            freshCodeLine?.backgroundColor = UIColor.black
+            freshBarImageView.addSubview(freshCodeLine!)
             freshBarImageView.bringSubview(toFront: foodImageView)
         }
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toEditFoodItem" {
+            let editVC = segue.destination as! NewFoodItemViewController
+            editVC.foodItemToEdit = foodItem
+        }
     }
-    */
+    
 
 }
