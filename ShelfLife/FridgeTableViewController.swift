@@ -57,7 +57,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -275,14 +275,13 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Remove", handler: {(action,indexPath) -> Void in
             
             // If food Item is "in kitchen" transfer is to "not in kitchen" section
-            if indexPath.section == 0 {
-                let foodItem = self.fetchResultsController.object(at: indexPath)
+            let foodItem = self.fetchResultsController.object(at: indexPath)
+            if foodItem.isInKitchen == true {
                 foodItem.isInKitchen = false
                 self.tableView.reloadData()
             }
             else {
                 // Delete the row from the tableview fetch Results Controller Delegate will handle the rest
-                let foodItem = self.fetchResultsController.object(at: indexPath)
                 context.delete(foodItem)
                 ad.saveContext()
             }
