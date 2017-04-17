@@ -230,9 +230,15 @@
                                                         <constraint firstAttribute="width" constant="64" id="II0-Jk-Zeg"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-ce-n5L">
-                                                    <rect key="frame" x="20" y="8" width="314" height="63"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-ce-n5L">
+                                                    <rect key="frame" x="20" y="8" width="253" height="63"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999X" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uw2-sh-fch">
+                                                    <rect key="frame" x="281" y="8" width="53" height="62"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -240,9 +246,12 @@
                                             <constraints>
                                                 <constraint firstItem="Jom-Ux-gye" firstAttribute="top" secondItem="yrY-Bz-xfu" secondAttribute="top" constant="8" id="2FG-c7-CUY"/>
                                                 <constraint firstItem="yMS-ce-n5L" firstAttribute="leading" secondItem="yrY-Bz-xfu" secondAttribute="leading" constant="20" id="2lf-BR-Hr4"/>
+                                                <constraint firstAttribute="bottom" secondItem="uw2-sh-fch" secondAttribute="bottom" constant="8.5" id="8Ny-Pu-ayw"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jom-Ux-gye" secondAttribute="bottom" constant="7" id="IUe-25-cwf"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jom-Ux-gye" secondAttribute="trailing" constant="8" id="P0A-mg-6G3"/>
-                                                <constraint firstItem="Jom-Ux-gye" firstAttribute="leading" secondItem="yMS-ce-n5L" secondAttribute="trailing" constant="8" id="VET-JD-AT3"/>
+                                                <constraint firstItem="uw2-sh-fch" firstAttribute="top" secondItem="yrY-Bz-xfu" secondAttribute="top" constant="8" id="Zjr-fZ-3Cm"/>
+                                                <constraint firstItem="uw2-sh-fch" firstAttribute="leading" secondItem="yMS-ce-n5L" secondAttribute="trailing" constant="8" id="by1-lH-avj"/>
+                                                <constraint firstItem="Jom-Ux-gye" firstAttribute="leading" secondItem="uw2-sh-fch" secondAttribute="trailing" constant="8" id="iIh-MW-VHm"/>
                                                 <constraint firstAttribute="bottom" secondItem="yMS-ce-n5L" secondAttribute="bottom" constant="8" id="oMC-K2-F5f"/>
                                                 <constraint firstItem="yMS-ce-n5L" firstAttribute="top" secondItem="yrY-Bz-xfu" secondAttribute="top" constant="8" id="rPF-im-Q7d"/>
                                             </constraints>
@@ -250,6 +259,7 @@
                                         <connections>
                                             <outlet property="foodItemImage" destination="Jom-Ux-gye" id="PRG-8o-YBW"/>
                                             <outlet property="foodItemLabel" destination="yMS-ce-n5L" id="fov-cL-JuJ"/>
+                                            <outlet property="quantityLabel" destination="uw2-sh-fch" id="qqm-7e-hJq"/>
                                             <segue destination="ZKU-JO-LQ2" kind="show" identifier="toFoodItemVC" id="iBn-NK-nLI"/>
                                         </connections>
                                     </tableViewCell>
@@ -586,7 +596,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pzo-tD-wMY"/>
+        <segue reference="UNr-qd-q28"/>
         <segue reference="iBn-NK-nLI"/>
-        <segue reference="crH-zn-P5L"/>
     </inferredMetricsTieBreakers>
 </document>

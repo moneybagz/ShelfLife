@@ -206,29 +206,12 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         print(foodItem.name)
         
-        
-        
-        // split FoodItems between two arrays for each section
-        //foodItem.isInKitchen ? foodInKitchen.insert(foodItem, at: indexPath.row) : foodNotInKitchen.insert(foodItem, at: indexPath.row)
-        
-//        if indexPath.section == 0 {
-//            // section 0 could have different values "in kitchen" / "not in kitchen"
-//            if foodItem.isInKitchen == true {
-//                foodInKitchen.append(foodItem)
-//            }
-//            else {
-//                foodNotInKitchen.append(foodItem)
-//            }
-//        }
-//        else {
-//            foodNotInKitchen.append(foodItem)
-//        }
+ 
         
         // CELL NAME
         cell.foodItemLabel.text = foodItem.name
         // CELL COLOR
-        //if foodItem.boughtDate != nil && foodItem.expDate != nil {
-        if indexPath.section != 1 {
+        if foodItem.isInKitchen == true {
             cell.foodItemLabel.textColor = getFreshnessWith(foodItem: foodItem)
         }
         else {
@@ -240,6 +223,13 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else {
             cell.foodItemImage.image = nil
+        }
+        // CELL QUANTITY
+        if foodItem.isInKitchen == true {
+            cell.quantityLabel.text = "\(foodItem.quantity)" + "X"
+        }
+        else {
+            cell.quantityLabel.text = ""
         }
         
         return cell

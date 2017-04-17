@@ -12,7 +12,7 @@ class FoodItemTableViewCell: UITableViewCell {
 
     @IBOutlet var foodImageView: UIImageView!
     @IBOutlet var foodNameLabel: UILabel!
-    
+    @IBOutlet var quantityLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

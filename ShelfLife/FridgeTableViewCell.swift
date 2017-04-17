@@ -12,6 +12,7 @@ class FridgeTableViewCell: UITableViewCell {
 
     @IBOutlet var foodItemLabel: UILabel!
     @IBOutlet var foodItemImage: UIImageView!
+    @IBOutlet var quantityLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

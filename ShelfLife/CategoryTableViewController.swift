@@ -137,7 +137,7 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         // CELL NAME
         cell.foodNameLabel.text = foodItem.name
         // CELL COLOR
-        if foodItem.boughtDate != nil && foodItem.expDate != nil {
+        if foodItem.isInKitchen == true {
             cell.foodNameLabel.textColor = getFreshnessWith(foodItem: foodItem)
         }
         else {
@@ -149,6 +149,13 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         }
         else {
             cell.foodImageView.image = nil
+        }
+        // CELL QUANTITY
+        if foodItem.isInKitchen == true {
+            cell.quantityLabel.text = "\(foodItem.quantity)" + "X"
+        }
+        else {
+            cell.quantityLabel.text = ""
         }
         
         return cell
