@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import UserNotifications
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Privacy settings
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
+            if !accepted {
+                print("Notification access denied.")
+            }
+        }
+        
         return true
     }
 
@@ -42,6 +51,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    // MARK: - Custom methods
+    
+    func scheduleNotification(with foodItem: FoodItem) {
+        // Time Components (Trigger)
+        // Get nearDate components (75% time elapsed)
+        let totalTime = foodItem.expDate?.timeIntervalSince(foodItem.boughtDate as! Date)
+        let nearRottenTime = totalTime! * 0.75
+        let nearDate = foodItem.boughtDate?.addingTimeInterval(nearRottenTime)
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents(in: .current, from: nearDate as! Date)
+        let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
+        
+        // Notification content
+        let content = UNMutableNotificationContent()
+        content.title = "\(foodItem.name!) is gonna go bad soon"
+        content.body = "lets eat this food asap! 😱"
+        content.sound = UNNotificationSound.default()
+        
+        // reminder action
+        content.categoryIdentifier = "myCategory"
+        
+        // create image attachment
+//        if let path = Bundle.main.path(forResource: "logo", ofType: "png") {
+//            let url = URL(fileURLWithPath: path)
+//            
+//            do {
+//                let attachment = try UNNotificationAttachment(identifier: "logo", url: url, options: nil)
+//                content.attachments = [attachment]
+//            } catch {
+//                print("The attachment was not loaded.")
+//            }
+//        }
+        
+        // Request
+        let request = UNNotificationRequest(identifier: foodItem.uuid!, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) {(error) in
+            if let error = error {
+                print("Uh oh! We had an error: \(error)")
+            }
+        }
+    }
+    
+    func cancelNotification(with foodItem: FoodItem) {
+        
+        if let uuid = foodItem.uuid {
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [uuid])
+        }
     }
 
     // MARK: - Core Data stack

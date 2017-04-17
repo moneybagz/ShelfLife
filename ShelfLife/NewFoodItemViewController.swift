@@ -281,6 +281,8 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         // Build a NSManaged Object FoodItem unless user is editing
         if foodItemToEdit == nil {
             foodItem = FoodItem(context: context)
+            // Give food item a unique id (for deleting User Notifications)
+            foodItem.uuid = UUID().uuidString
         }
         else {
             // FoodItem is an object not a struct so this assignment is ok
@@ -311,6 +313,10 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
             foodItem.expDate = expDatePicker.date as NSDate?
             // QUANTITY
             foodItem.quantity = Int16(quantityTextField.text!)!
+            
+            //USER NOTIFICATION
+            let delegate = UIApplication.shared.delegate as? AppDelegate
+            delegate?.scheduleNotification(with: foodItem)
         }
         
         //save food item to coreData SQL database

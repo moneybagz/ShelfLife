@@ -203,9 +203,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "fridgeCell", for: indexPath) as! FridgeTableViewCell
         
         let foodItem = fetchResultsController.object(at: indexPath)
-        
-        print(foodItem.name)
-        
  
         
         // CELL NAME
@@ -278,6 +275,11 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
             let foodItem = self.fetchResultsController.object(at: indexPath)
             if foodItem.isInKitchen == true {
                 foodItem.isInKitchen = false
+                
+                //delete user notification
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.cancelNotification(with: foodItem)
+
                 self.tableView.reloadData()
             }
             else {

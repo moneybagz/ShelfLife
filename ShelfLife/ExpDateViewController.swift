@@ -52,6 +52,8 @@ class ExpDateViewController: UIViewController {
         
         let foodItemToSave = FoodItem(context: context)
         
+        // UUID
+        foodItemToSave.uuid = UUID().uuidString
         // NAME
         foodItemToSave.name = foodItem.name
         // CATEGORY
@@ -68,6 +70,10 @@ class ExpDateViewController: UIViewController {
         foodItemToSave.expDate = expDate as NSDate
         // QUANTITY
         foodItemToSave.quantity = foodItem.quantity
+        
+        //USER NOTIFICATION
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.scheduleNotification(with: foodItemToSave)
         
         
         // Delete "not in kitchen" item when creating a new one

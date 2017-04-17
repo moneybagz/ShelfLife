@@ -205,6 +205,11 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
             let foodItem = self.fetchResultsController.object(at: indexPath)
             if foodItem.isInKitchen == true {
                 foodItem.isInKitchen = false
+                
+                //delete user notification
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.cancelNotification(with: foodItem)
+                
                 self.tableView.reloadData()
             }
             else {
