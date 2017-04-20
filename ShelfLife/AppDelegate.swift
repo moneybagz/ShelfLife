@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Time Components (Trigger)
         // Get nearDate components (75% time elapsed)
         let totalTime = foodItem.expDate?.timeIntervalSince(foodItem.boughtDate as! Date)
-        let nearRottenTime = totalTime! * 0.75
+        let nearRottenTime = totalTime! * 0.76
         let nearDate = foodItem.boughtDate?.addingTimeInterval(nearRottenTime)
         
         let calendar = Calendar(identifier: .gregorian)

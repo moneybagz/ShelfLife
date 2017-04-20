@@ -271,10 +271,31 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Delete button
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Remove", handler: {(action,indexPath) -> Void in
             
-            // If food Item is "in kitchen" transfer is to "not in kitchen" section
             let foodItem = self.fetchResultsController.object(at: indexPath)
+            
+            // If food Item is "in kitchen" transfer to "not in kitchen" section
             if foodItem.isInKitchen == true {
+                
+                // delete "in my kitchen" information
                 foodItem.isInKitchen = false
+                foodItem.boughtDate = nil
+                foodItem.expDate = nil
+                
+                //check if other foodItems with same name exist then delete
+                let foodItems = self.fetchResultsController.fetchedObjects
+                
+                var counter:Int = 0
+                for food in foodItems! {
+                    if foodItem.name == food.name {
+                        counter += 1
+                    }
+                }
+                
+                if counter > 1 {
+                    context.delete(foodItem)
+                }
+                
+                ad.saveContext()
                 
                 //delete user notification
                 let delegate = UIApplication.shared.delegate as? AppDelegate
@@ -282,6 +303,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
 
                 self.tableView.reloadData()
             }
+            // If food item is "not in kitchen" then just delete it.
             else {
                 // Delete the row from the tableview fetch Results Controller Delegate will handle the rest
                 context.delete(foodItem)
