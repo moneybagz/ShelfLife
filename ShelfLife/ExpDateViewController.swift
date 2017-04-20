@@ -8,14 +8,18 @@
 
 import UIKit
 
-class ExpDateViewController: UIViewController {
+class ExpDateViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var expDatePicker: UIDatePicker!
+    @IBOutlet var quantityTextField: UITextField!
     
     var foodItem:FoodItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add UIToolBar on keyboard and Done button on UIToolBar
+        self.addDoneButtonOnKeyboard()
         
         // Configure Date Picker
         expDatePicker.minimumDate = Date()
@@ -69,7 +73,12 @@ class ExpDateViewController: UIViewController {
         // EXP DATE
         foodItemToSave.expDate = expDate as NSDate
         // QUANTITY
-        foodItemToSave.quantity = foodItem.quantity
+        if quantityTextField.text == nil || quantityTextField.text == "" {
+            foodItemToSave.quantity = 1
+        }
+        else {
+            foodItemToSave.quantity = Int16(quantityTextField.text!)!
+        }
         
         //USER NOTIFICATION
         let delegate = UIApplication.shared.delegate as? AppDelegate
@@ -83,6 +92,42 @@ class ExpDateViewController: UIViewController {
 
         ad.saveContext()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Text Field Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    // custom method for putting a done button on number pad
+    func addDoneButtonOnKeyboard()
+    {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewFoodItemViewController.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.quantityTextField.inputAccessoryView = doneToolbar
+        
+    }
+    
+    func doneButtonAction()
+    {
+        self.quantityTextField.resignFirstResponder()
     }
 
     /*

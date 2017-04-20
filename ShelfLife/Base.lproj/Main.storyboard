@@ -237,7 +237,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999X" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uw2-sh-fch">
-                                                    <rect key="frame" x="281" y="8" width="53" height="62"/>
+                                                    <rect key="frame" x="281" y="8" width="53" height="63.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -423,7 +423,7 @@
                                 </connections>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TnD-N0-D1J">
-                                <rect key="frame" x="167" y="416" width="80" height="49"/>
+                                <rect key="frame" x="167" y="464" width="80" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="deF-1O-tYG"/>
                                     <constraint firstAttribute="width" constant="80" id="xzd-pD-A7n"/>
@@ -434,19 +434,40 @@
                                     <action selector="saveButtonPressed:" destination="U6A-Jl-7cL" eventType="touchUpInside" id="YTD-eB-ZLA"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" placeholder="QUANTITY?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sgi-CB-sgT">
+                                <rect key="frame" x="20.000000000000007" y="404" width="98.666666666666686" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogY-fn-BCh">
+                                <rect key="frame" x="126.66666666666666" y="404" width="267.33333333333337" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="78x-x1-C0a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wEl-Am-Dkc" firstAttribute="leading" secondItem="VgK-8z-ifl" secondAttribute="leading" id="2EE-75-YD2"/>
+                            <constraint firstItem="TnD-N0-D1J" firstAttribute="top" secondItem="ogY-fn-BCh" secondAttribute="bottom" constant="30" id="4Rr-ED-o20"/>
+                            <constraint firstItem="ogY-fn-BCh" firstAttribute="leading" secondItem="sgi-CB-sgT" secondAttribute="trailing" constant="8" id="66K-2C-Xxl"/>
+                            <constraint firstItem="sgi-CB-sgT" firstAttribute="leading" secondItem="VgK-8z-ifl" secondAttribute="leading" constant="20" id="A8w-no-GDA"/>
                             <constraint firstItem="wEl-Am-Dkc" firstAttribute="top" secondItem="MDV-ik-oeA" secondAttribute="bottom" constant="8" id="DsX-sK-clB"/>
                             <constraint firstAttribute="trailing" secondItem="wEl-Am-Dkc" secondAttribute="trailing" id="MGs-bJ-J70"/>
+                            <constraint firstItem="sgi-CB-sgT" firstAttribute="top" secondItem="wEl-Am-Dkc" secondAttribute="bottom" constant="8" id="Mg9-3B-lY9"/>
                             <constraint firstItem="wEl-Am-Dkc" firstAttribute="height" secondItem="VgK-8z-ifl" secondAttribute="height" multiplier="0.5" id="bcJ-z5-xHG"/>
-                            <constraint firstItem="TnD-N0-D1J" firstAttribute="top" secondItem="wEl-Am-Dkc" secondAttribute="bottom" constant="20" id="fo5-bV-JjT"/>
                             <constraint firstItem="TnD-N0-D1J" firstAttribute="centerX" secondItem="VgK-8z-ifl" secondAttribute="centerX" id="kBR-TV-ka7"/>
+                            <constraint firstItem="ogY-fn-BCh" firstAttribute="top" secondItem="wEl-Am-Dkc" secondAttribute="bottom" constant="8" id="l3v-Dp-Yuc"/>
+                            <constraint firstAttribute="trailing" secondItem="ogY-fn-BCh" secondAttribute="trailing" constant="20" id="mpA-YV-UMs"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="expDatePicker" destination="wEl-Am-Dkc" id="1ry-ZX-SbF"/>
+                        <outlet property="quantityTextField" destination="sgi-CB-sgT" id="Mrq-dV-AxX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNB-yN-ldP" userLabel="First Responder" sceneMemberID="firstResponder"/>
