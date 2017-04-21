@@ -281,6 +281,10 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
                 foodItem.boughtDate = nil
                 foodItem.expDate = nil
                 
+                //delete user notification
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.cancelNotification(with: foodItem)
+                
                 //check if other foodItems with same name exist then delete
                 let foodItems = self.fetchResultsController.fetchedObjects
                 
@@ -296,10 +300,6 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
                 ad.saveContext()
-                
-                //delete user notification
-                let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.cancelNotification(with: foodItem)
 
                 self.tableView.reloadData()
             }
