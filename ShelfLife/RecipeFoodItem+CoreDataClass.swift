@@ -1,5 +1,5 @@
 //
-//  Recipe+CoreDataClass.swift
+//  RecipeFoodItem+CoreDataClass.swift
 //  ShelfLife
 //
 //  Created by Clyfford Millet on 4/21/17.
@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 
-public class Recipe: NSManagedObject {
+public class RecipeFoodItem: NSManagedObject {
 
 }

@@ -458,7 +458,7 @@
                     <navigationItem key="navigationItem" title="Recipes" id="neu-xJ-pog">
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="hsB-oj-f9R">
                             <connections>
-                                <segue destination="YFG-qW-fOg" kind="show" id="Dqu-jn-68E"/>
+                                <segue destination="YFG-qW-fOg" kind="show" id="2P8-QE-kJK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -526,7 +526,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter quantity" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kks-T0-Ozc">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" placeholder="enter quantity" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kks-T0-Ozc">
                                 <rect key="frame" x="20" y="227" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -538,7 +538,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CPI-wJ-2Os" customClass="RecipeCreatorTableViewCell" customModule="ShelfLife" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="CPI-wJ-2Os" customClass="RecipeCreatorTableViewCell" customModule="ShelfLife" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CPI-wJ-2Os" id="Oca-wG-hz7">
@@ -585,6 +585,7 @@
                         <outlet property="ingredientTextField" destination="Plh-BX-6yv" id="k1K-WK-hRB"/>
                         <outlet property="nameTextField" destination="F97-HD-EUK" id="nco-9d-CzQ"/>
                         <outlet property="quantityTextField" destination="Kks-T0-Ozc" id="WeX-iX-uMH"/>
+                        <outlet property="tableView" destination="Wvu-Xr-9dr" id="5pg-mV-dgH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGg-TC-NS7" userLabel="First Responder" sceneMemberID="firstResponder"/>

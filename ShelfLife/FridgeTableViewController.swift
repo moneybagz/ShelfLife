@@ -20,12 +20,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
    // var foodNotInKitchen: [FoodItem] = []
     let headerTitles = ["In my kitchen", "Not in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
-//    // help to show when section needs to be reinserted
-//    var inMyKitchenSectionDeleted:Bool = false
-//    var notInMyKitchenSectionDeleted:Bool = false
-//    // these bools prevent reinserting section after section was just reinserted
-//    var sectionOneReinsertedAfterZeroSections = false
-//    var sectionTwoReinsertedAfterZeroSections = false
+
     
     // Properties for AVCapture Metadata Output Object Delegate
     var captureSession:AVCaptureSession?
