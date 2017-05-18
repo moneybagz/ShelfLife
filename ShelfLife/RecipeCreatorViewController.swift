@@ -56,26 +56,26 @@ class RecipeCreatorViewController: UIViewController, UITableViewDataSource, UITa
         return cell
     }
     
+    // MARK: - Table View Delegate
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            ingredients.remove(at: indexPath.row)
+            quantities.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: - Text Field Delegate Methods
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if ingredientTextField.text != "" || ingredientTextField.text != nil {
-            
-            guard quantityTextField.text != nil || quantityTextField.text != nil else {
-                
-                let alertController = UIAlertController(title: "CANNOT ADD", message: "quantity must have a number", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
-                alertController.addAction(okAction)
-                present(alertController, animated: true, completion: nil)
-                
-                return
-            }
-            
-            ingredients.append(ingredientTextField.text!)
-            quantities.append(quantityTextField.text!)
-            
-            tableView.reloadData()
-        }
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -112,6 +112,79 @@ class RecipeCreatorViewController: UIViewController, UITableViewDataSource, UITa
         self.quantityTextField.resignFirstResponder()
     }
 
+    //MARK: - Actions
+
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+        guard ingredientTextField.text != nil || ingredientTextField.text != nil else {
+            
+            let alertController = UIAlertController(title: "CANNOT ADD INGREDIENT", message: "ingredient must have a name", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        ingredients.append(ingredientTextField.text!)
+        quantities.append(quantityTextField.text!)
+        
+        tableView.reloadData()
+        
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        guard nameTextField.text != nil || nameTextField.text != nil else {
+            
+            let alertController = UIAlertController(title: "CANNOT SAVE", message: "recipe must have a name", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        guard ingredients.count != 0 else {
+            
+            let alertController = UIAlertController(title: "CANNOT SAVE", message: "recipe doesn't have any ingredients", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        // Create managed object Recipe
+        let recipe = Recipe(context: context)
+        recipe.name = nameTextField.text
+        
+
+        
+        // Create managed objects RecipeFoodItems
+        for (index, ingredient) in ingredients.enumerated() {
+            print(ingredient)
+            print(quantities[index])
+        
+            let recipeItem = RecipeFoodItem(context: context)
+            recipeItem.name = ingredient
+            recipeItem.quantity = quantities[index]
+            recipeItem.toRecipe = recipe
+        }
+        
+//        let recipeItem = RecipeFoodItem(context: context)
+//        recipeItem.name = "sam"
+        
+      
+        
+        // Save managed objects to coreData SQL database
+        ad.saveContext()
+        
+        _ = navigationController?.popViewController(animated: true)
+    }
+   
+    
+    
     /*
     // MARK: - Navigation
 

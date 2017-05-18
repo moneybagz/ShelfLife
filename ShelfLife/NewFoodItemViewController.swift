@@ -78,8 +78,13 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         
         // Default image for food item is its Category Image
         if imageIsEdited == false {
-            if let foodImage = UIImage(data: categories?.first?.picture as! Data) {
-                foodImageView.image = foodImage
+            if categories?.count != 0 {
+                if let foodImage = UIImage(data: categories?.first?.picture as! Data) {
+                    foodImageView.image = foodImage
+                }
+            }
+            else {
+                foodCategoryPicker.isHidden = true
             }
         }
         

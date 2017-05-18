@@ -98,17 +98,19 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     func testData(){
         let foodItem1 = FoodItem(context: context)
         foodItem1.name = "cheese"
-        foodItem1.isInKitchen = true
+        foodItem1.isInKitchen = false
+        foodItem1.boughtDate = Date() as NSDate
         
         let foodItem2 = FoodItem(context: context)
         foodItem2.name = "Pear"
         foodItem2.isInKitchen = false
-        
+        foodItem2.boughtDate = Date() as NSDate
+
         let foodItem3 = FoodItem(context: context)
         foodItem3.name = "Filet Mignon"
         foodItem3.boughtDate = Date() as NSDate
         foodItem3.isInKitchen = false
-        
+
         foodItems.append(foodItem1)
         foodItems.append(foodItem2)
         foodItems.append(foodItem3)

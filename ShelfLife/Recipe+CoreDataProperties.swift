@@ -2,7 +2,7 @@
 //  Recipe+CoreDataProperties.swift
 //  ShelfLife
 //
-//  Created by Clyfford Millet on 4/21/17.
+//  Created by Clyfford Millet on 5/17/17.
 //  Copyright © 2017 Clyff Millet. All rights reserved.
 //
 
@@ -17,24 +17,23 @@ extension Recipe {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var picture: NSData?
-    @NSManaged public var toRecipeFoodItems: NSSet?
+    @NSManaged public var toRecipeFoodItem: NSSet?
 
 }
 
-// MARK: Generated accessors for toRecipeFoodItems
+// MARK: Generated accessors for toRecipeFoodItem
 extension Recipe {
 
-    @objc(addToRecipeFoodItemsObject:)
-    @NSManaged public func addToToRecipeFoodItems(_ value: RecipeFoodItem)
+    @objc(addToRecipeFoodItemObject:)
+    @NSManaged public func addToToRecipeFoodItem(_ value: RecipeFoodItem)
 
-    @objc(removeToRecipeFoodItemsObject:)
-    @NSManaged public func removeFromToRecipeFoodItems(_ value: RecipeFoodItem)
+    @objc(removeToRecipeFoodItemObject:)
+    @NSManaged public func removeFromToRecipeFoodItem(_ value: RecipeFoodItem)
 
-    @objc(addToRecipeFoodItems:)
-    @NSManaged public func addToToRecipeFoodItems(_ values: NSSet)
+    @objc(addToRecipeFoodItem:)
+    @NSManaged public func addToToRecipeFoodItem(_ values: NSSet)
 
-    @objc(removeToRecipeFoodItems:)
-    @NSManaged public func removeFromToRecipeFoodItems(_ values: NSSet)
+    @objc(removeToRecipeFoodItem:)
+    @NSManaged public func removeFromToRecipeFoodItem(_ values: NSSet)
 
 }

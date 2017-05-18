@@ -18,18 +18,17 @@
     </entity>
     <entity name="Recipe" representedClassName=".Recipe" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
-        <relationship name="toRecipeFoodItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecipeFoodItem" inverseName="toRecipe" inverseEntity="RecipeFoodItem" syncable="YES"/>
+        <relationship name="toRecipeFoodItem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecipeFoodItem" inverseName="toRecipe" inverseEntity="RecipeFoodItem" syncable="YES"/>
     </entity>
     <entity name="RecipeFoodItem" representedClassName=".RecipeFoodItem" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="toRecipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="toRecipeFoodItems" inverseEntity="Recipe" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="toRecipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="toRecipeFoodItem" inverseEntity="Recipe" syncable="YES"/>
     </entity>
     <elements>
         <element name="Category" positionX="-56" positionY="-99" width="128" height="90"/>
         <element name="FoodItem" positionX="-216" positionY="3" width="128" height="178"/>
-        <element name="Recipe" positionX="-45" positionY="171" width="128" height="88"/>
         <element name="RecipeFoodItem" positionX="-47" positionY="18" width="128" height="88"/>
+        <element name="Recipe" positionX="-45" positionY="152" width="128" height="73"/>
     </elements>
 </model>

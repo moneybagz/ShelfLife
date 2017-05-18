@@ -2,7 +2,7 @@
 //  RecipeFoodItem+CoreDataProperties.swift
 //  ShelfLife
 //
-//  Created by Clyfford Millet on 4/21/17.
+//  Created by Clyfford Millet on 5/17/17.
 //  Copyright © 2017 Clyff Millet. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ extension RecipeFoodItem {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var quantity: Int16
+    @NSManaged public var quantity: String?
     @NSManaged public var toRecipe: Recipe?
 
 }

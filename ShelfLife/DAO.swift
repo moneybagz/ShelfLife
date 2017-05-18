@@ -88,4 +88,27 @@ class DAO {
         
         return fetchResultsController
     }
+    
+    // FETCH RECIPES
+    internal static func getRecipes() -> NSFetchedResultsController<Recipe> {
+        
+        let fetchResultsController: NSFetchedResultsController<Recipe>
+        
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+    
+        let nameSort = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        request.sortDescriptors = [nameSort]
+        
+        // create controller using ap delegate to retrieve context
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: ad.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do{
+            try fetchResultsController.performFetch()
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+        
+        return fetchResultsController
+    }
 }
