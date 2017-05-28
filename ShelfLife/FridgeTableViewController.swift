@@ -67,9 +67,14 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Get total time between bought date and expiration date
         let totalTime = foodItem.expDate?.timeIntervalSince(foodItem.boughtDate as! Date)
         
+        print(foodItem.boughtDate)
+        print(foodItem.expDate)
+        print("TOTAL TIME \(totalTime) &&&&&&&&&&&&&&&")
+        
         // Get elapsed time between now and bought date
         let now = Date()
         let elapsedTime = now.timeIntervalSince(foodItem.boughtDate as! Date)
+        print("ELAPSED TIME \(elapsedTime) ********************")
         
         // Compute the increase percentage
         let percent:Int

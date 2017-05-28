@@ -111,4 +111,31 @@ class DAO {
         
         return fetchResultsController
     }
+    
+    // FETCH RECIPE FOOD ITEMS
+    internal static func getRecipeList(recipe: Recipe) -> NSFetchedResultsController<RecipeFoodItem> {
+        
+        let fetchResultsController: NSFetchedResultsController<RecipeFoodItem>
+        
+        let request: NSFetchRequest<RecipeFoodItem> = RecipeFoodItem.fetchRequest()
+        
+        let nameSort = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        request.sortDescriptors = [nameSort]
+        
+        // create predicate to filter by recipe
+        let recipePredicate = NSPredicate(format: "toRecipe = %@", recipe)
+        request.predicate = recipePredicate
+        
+        // create controller using ap delegate to retrieve context
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: ad.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do{
+            try fetchResultsController.performFetch()
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+        
+        return fetchResultsController
+    }
 }

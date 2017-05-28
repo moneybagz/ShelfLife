@@ -71,7 +71,11 @@ class ExpDateViewController: UIViewController, UITextFieldDelegate {
         // BOUGHT DATE
         foodItemToSave.boughtDate = Date() as NSDate?
         // EXP DATE
-        foodItemToSave.expDate = expDate as NSDate
+        let cal: Calendar = Calendar(identifier: .gregorian)
+        
+        let expDateAM: Date = cal.date(bySettingHour: 0, minute: 0, second: 0, of: expDate)!
+        
+        foodItemToSave.expDate = expDateAM as NSDate
         // QUANTITY
         if quantityTextField.text == nil || quantityTextField.text == "" {
             foodItemToSave.quantity = 1

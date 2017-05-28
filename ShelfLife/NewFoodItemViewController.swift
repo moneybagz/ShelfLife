@@ -315,7 +315,12 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
                 foodItem.boughtDate = Date() as NSDate?
             }
             // EXP DATE
-            foodItem.expDate = expDatePicker.date as NSDate?
+            let cal: Calendar = Calendar(identifier: .gregorian)
+            
+            let expDateAM: Date = cal.date(bySettingHour: 0, minute: 0, second: 0, of: expDatePicker.date)!
+            
+            foodItem.expDate = expDateAM as NSDate?
+            
             // QUANTITY
             foodItem.quantity = Int16(quantityTextField.text!)!
             

@@ -14,7 +14,6 @@ class RecipeTableViewController: UIViewController, UITableViewDataSource, UITabl
 
     @IBOutlet var tableView: UITableView!
     
-    var recipes = [Recipe]()
     var fetchResultsController: NSFetchedResultsController<Recipe>!
     
     override func viewDidLoad() {
@@ -24,7 +23,6 @@ class RecipeTableViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         
         fetchResultsController = DAO.getRecipes()
-        recipes = fetchResultsController.fetchedObjects!
         
         fetchResultsController.delegate = self
 
@@ -64,6 +62,24 @@ class RecipeTableViewController: UIViewController, UITableViewDataSource, UITabl
         
         return cell
     }
+    
+    // MARK: - Table view delegate methods
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            let recipe = fetchResultsController.object(at: indexPath)
+            context.delete(recipe)
+            ad.saveContext()
+        }
+    }
+    
     
     // MARK: - Fetch Results Controller Delegate
     
@@ -115,14 +131,18 @@ class RecipeTableViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toRecipeList" {
+            let destinationVC = segue.destination as! RecipeListViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                destinationVC.recipe = fetchResultsController.object(at: indexPath)
+            }
+        }
     }
-    */
+    
 
 }

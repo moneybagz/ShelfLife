@@ -451,6 +451,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="recipeNameLabel" destination="ihn-Wt-OhY" id="TaX-GV-eay"/>
+                                    <segue destination="1vd-vb-x5n" kind="show" identifier="toRecipeList" id="Sih-jP-lZW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -598,6 +599,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGg-TC-NS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4331.884057971015" y="838.85869565217399"/>
+        </scene>
+        <!--Recipe List View Controller-->
+        <scene sceneID="baQ-1U-G27">
+            <objects>
+                <viewController id="1vd-vb-x5n" customClass="RecipeListViewController" customModule="ShelfLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gtf-q8-dFW"/>
+                        <viewControllerLayoutGuide type="bottom" id="TMv-Py-anG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ibr-Nb-8th">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-zO-WDJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeList" id="h9a-3Z-jQZ" customClass="RecipeListTableViewCell" customModule="ShelfLife" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9a-3Z-jQZ" id="pvt-hJ-JU6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUm-Ck-JWU">
+                                                    <rect key="frame" x="40" y="14" width="41.666666666666671" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw9-G6-vCJ">
+                                                    <rect key="frame" x="97.666666666666657" y="14" width="276.33333333333337" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rw9-G6-vCJ" firstAttribute="leading" secondItem="aUm-Ck-JWU" secondAttribute="trailing" constant="16" id="GqV-O1-C3g"/>
+                                                <constraint firstItem="rw9-G6-vCJ" firstAttribute="top" secondItem="pvt-hJ-JU6" secondAttribute="top" constant="14" id="HeY-Fx-BnK"/>
+                                                <constraint firstItem="aUm-Ck-JWU" firstAttribute="top" secondItem="pvt-hJ-JU6" secondAttribute="top" constant="14" id="QU5-Wd-UwP"/>
+                                                <constraint firstAttribute="trailing" secondItem="rw9-G6-vCJ" secondAttribute="trailing" constant="40" id="lm1-3h-hCd"/>
+                                                <constraint firstItem="aUm-Ck-JWU" firstAttribute="leading" secondItem="pvt-hJ-JU6" secondAttribute="leading" constant="40" id="mCw-81-Isv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="amountLabel" destination="rw9-G6-vCJ" id="Jt2-1R-Ulv"/>
+                                            <outlet property="foodLabel" destination="aUm-Ck-JWU" id="uOY-xP-Kk3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RYk-zO-WDJ" secondAttribute="trailing" id="Zav-Ly-zQs"/>
+                            <constraint firstItem="RYk-zO-WDJ" firstAttribute="leading" secondItem="ibr-Nb-8th" secondAttribute="leading" id="p6p-sl-xdx"/>
+                            <constraint firstAttribute="bottom" secondItem="RYk-zO-WDJ" secondAttribute="bottom" id="tEI-dX-7iP"/>
+                            <constraint firstItem="RYk-zO-WDJ" firstAttribute="top" secondItem="ibr-Nb-8th" secondAttribute="top" id="yK1-uD-tYk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="RYk-zO-WDJ" id="xy1-XS-3TE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wq7-2D-2qQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3631.884057971015" y="1533.4239130434785"/>
         </scene>
         <!--Exp Date View Controller-->
         <scene sceneID="mcD-qZ-gBV">
