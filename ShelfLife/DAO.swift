@@ -138,4 +138,38 @@ class DAO {
         
         return fetchResultsController
     }
+    
+    // FETCH FOOD ITEMS IN RECIPE LIST
+    internal static func getFoodItemsIn(recipeList: [RecipeFoodItem]) -> NSFetchedResultsController<FoodItem> {
+        
+        let fetchResultsController: NSFetchedResultsController<FoodItem>
+        
+        let request: NSFetchRequest<FoodItem> = FoodItem.fetchRequest()
+        
+        let nameSort = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        request.sortDescriptors = [nameSort]
+        
+//        // Predicate to only find food items that is also in your recipe list
+//        let predicate1 = NSPredicate(format:"name IN %@", recipeList)
+        
+        // Predicate to only take food items that are in fridge
+        let predicate2 = NSPredicate(format: "isInKitchen == %@", NSNumber(booleanLiteral: true))
+        
+//        // combining predicates into compound predicate
+//        let compound = NSCompoundPredicate.init(andPredicateWithSubpredicates: [predicate1, predicate2])
+        
+        request.predicate = predicate2
+
+        // create controller using ap delegate to retrieve context
+        fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: ad.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do{
+            try fetchResultsController.performFetch()
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+        
+        return fetchResultsController
+    }
 }
