@@ -297,7 +297,9 @@ class NewFoodItemViewController: UIViewController, NSFetchedResultsControllerDel
         // NAME
         foodItem.name = nameTextField.text
         // CATEGORY
-        foodItem.toCategory = categories?[foodCategoryPicker.selectedRow(inComponent: 0)]
+        if categories != nil && categories?.count != 0 {
+            foodItem.toCategory = categories?[foodCategoryPicker.selectedRow(inComponent: 0)]
+        }
         // IMAGE
         if let image = foodImageView.image {
             let data = UIImageJPEGRepresentation(image, 1.0)

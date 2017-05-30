@@ -223,14 +223,14 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tuA-sh-XnU" id="kuJ-2h-ygW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M1G-KO-fWX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="159"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whf-9y-Cxf">
-                                                    <rect key="frame" x="160" y="80" width="0.0" height="0.0"/>
+                                                    <rect key="frame" x="207" y="80" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="26"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -299,24 +299,24 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUK-KM-vj0" id="yrY-Bz-xfu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jom-Ux-gye">
-                                                    <rect key="frame" x="248" y="8" width="64" height="64"/>
+                                                    <rect key="frame" x="342" y="8" width="64" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="FDa-jq-TAW"/>
                                                         <constraint firstAttribute="width" constant="64" id="II0-Jk-Zeg"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-ce-n5L">
-                                                    <rect key="frame" x="20" y="8" width="159" height="63"/>
+                                                    <rect key="frame" x="20" y="8" width="253" height="63"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999X" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uw2-sh-fch">
-                                                    <rect key="frame" x="187" y="8" width="53" height="63"/>
+                                                    <rect key="frame" x="281" y="8" width="53" height="63"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -530,14 +530,19 @@ BarCode</string>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXJ-Dp-iCf" customClass="RecipeView" customModule="ShelfLife" customModuleProvider="target">
                                             <rect key="frame" x="13" y="11" width="388" height="57.666666666666671"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihn-Wt-OhY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihn-Wt-OhY">
                                                     <rect key="frame" x="8" y="18" width="372" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ihn-Wt-OhY" secondAttribute="trailing" constant="8" id="eiR-rp-xMe"/>
+                                                <constraint firstItem="ihn-Wt-OhY" firstAttribute="top" secondItem="qXJ-Dp-iCf" secondAttribute="top" constant="18" id="hNX-Fq-kxA"/>
+                                                <constraint firstItem="ihn-Wt-OhY" firstAttribute="leading" secondItem="qXJ-Dp-iCf" secondAttribute="leading" constant="8" id="kIe-2e-MUd"/>
+                                                <constraint firstAttribute="bottom" secondItem="ihn-Wt-OhY" secondAttribute="bottom" constant="18.670000000000002" id="wlz-p7-HHT"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                     <real key="value" value="5"/>
@@ -657,7 +662,7 @@ BarCode</string>
                                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CPI-wJ-2Os" id="Oca-wG-hz7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="cheeeeeese!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyF-di-lth">
@@ -781,7 +786,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9a-3Z-jQZ" id="pvt-hJ-JU6">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUm-Ck-JWU">
@@ -791,7 +796,7 @@ BarCode</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw9-G6-vCJ">
-                                                    <rect key="frame" x="98" y="14" width="182" height="21"/>
+                                                    <rect key="frame" x="98" y="14" width="276" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -816,6 +821,10 @@ BarCode</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RYk-zO-WDJ" secondAttribute="trailing" id="Zav-Ly-zQs"/>
+                            <constraint firstItem="RYk-zO-WDJ" firstAttribute="leading" secondItem="ibr-Nb-8th" secondAttribute="leading" id="aJy-nz-7eW"/>
+                            <constraint firstItem="RYk-zO-WDJ" firstAttribute="top" secondItem="ibr-Nb-8th" secondAttribute="top" id="hxs-io-PZd"/>
+                            <constraint firstAttribute="bottom" secondItem="RYk-zO-WDJ" secondAttribute="bottom" id="lcc-nj-Cz2"/>
+                            <constraint firstAttribute="trailing" secondItem="RYk-zO-WDJ" secondAttribute="trailing" id="oCc-NI-eFZ"/>
                             <constraint firstItem="RYk-zO-WDJ" firstAttribute="leading" secondItem="ibr-Nb-8th" secondAttribute="leading" id="p6p-sl-xdx"/>
                             <constraint firstAttribute="bottom" secondItem="RYk-zO-WDJ" secondAttribute="bottom" id="tEI-dX-7iP"/>
                             <constraint firstItem="RYk-zO-WDJ" firstAttribute="top" secondItem="ibr-Nb-8th" secondAttribute="top" id="yK1-uD-tYk"/>
@@ -997,16 +1006,15 @@ BarCode</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DAL-ZM-YPP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DAL-ZM-YPP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fridgeCell" id="RTf-8D-Ul4">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTf-8D-Ul4" id="5kg-He-9ty">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1017,6 +1025,12 @@ BarCode</string>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DAL-ZM-YPP" firstAttribute="top" secondItem="FH4-cL-ZPq" secondAttribute="top" id="0Vj-f7-itf"/>
+                            <constraint firstAttribute="trailing" secondItem="DAL-ZM-YPP" secondAttribute="trailing" id="U3I-R5-Wt8"/>
+                            <constraint firstItem="DAL-ZM-YPP" firstAttribute="leading" secondItem="FH4-cL-ZPq" secondAttribute="leading" id="sds-kL-4uA"/>
+                            <constraint firstAttribute="bottom" secondItem="DAL-ZM-YPP" secondAttribute="bottom" id="uxg-Ay-Vdj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Category" id="3X4-4h-WEs">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="xgy-bg-PpI">
@@ -1076,8 +1090,8 @@ BarCode</string>
         <image name="freshBar" width="1333" height="333"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iBn-NK-nLI"/>
-        <segue reference="crH-zn-P5L"/>
-        <segue reference="pzo-tD-wMY"/>
+        <segue reference="UNr-qd-q28"/>
+        <segue reference="xyA-hh-50G"/>
+        <segue reference="B1x-l3-0i7"/>
     </inferredMetricsTieBreakers>
 </document>
