@@ -45,5 +45,10 @@
 	<string>&quot;Access needed to use your camera&quot;</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>&quot;Access needed to photo gallery&quot;</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>membra.ttf</string>
+		<string>pokemon.ttf</string>
+	</array>
 </dict>
 </plist>

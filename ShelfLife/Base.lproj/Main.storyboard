@@ -223,12 +223,9 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tuA-sh-XnU" id="kuJ-2h-ygW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M1G-KO-fWX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="159"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whf-9y-Cxf">
                                                     <rect key="frame" x="207" y="80" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="26"/>
@@ -236,15 +233,18 @@ BarCode</string>
                                                     <nil key="highlightedColor"/>
                                                     <size key="shadowOffset" width="-2" height="-2"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M1G-KO-fWX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="159.66666666666666"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.81176470590000005" green="0.84313725490000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="M1G-KO-fWX" firstAttribute="leading" secondItem="kuJ-2h-ygW" secondAttribute="leading" id="347-mT-9TD"/>
                                                 <constraint firstItem="Whf-9y-Cxf" firstAttribute="centerX" secondItem="kuJ-2h-ygW" secondAttribute="centerX" id="CVz-y4-xOW"/>
-                                                <constraint firstItem="M1G-KO-fWX" firstAttribute="top" secondItem="kuJ-2h-ygW" secondAttribute="top" id="QN4-jr-Jn4"/>
-                                                <constraint firstItem="M1G-KO-fWX" firstAttribute="leading" secondItem="kuJ-2h-ygW" secondAttribute="leading" id="YUe-C8-woY"/>
-                                                <constraint firstAttribute="bottom" secondItem="M1G-KO-fWX" secondAttribute="bottom" id="apV-cl-Jws"/>
+                                                <constraint firstAttribute="bottom" secondItem="M1G-KO-fWX" secondAttribute="bottom" id="G7X-rI-LPS"/>
+                                                <constraint firstItem="M1G-KO-fWX" firstAttribute="top" secondItem="kuJ-2h-ygW" secondAttribute="top" id="XiR-TH-ofa"/>
                                                 <constraint firstItem="Whf-9y-Cxf" firstAttribute="centerY" secondItem="kuJ-2h-ygW" secondAttribute="centerY" id="pdt-v2-h5b"/>
-                                                <constraint firstAttribute="trailing" secondItem="M1G-KO-fWX" secondAttribute="trailing" id="wS0-mD-Yd3"/>
+                                                <constraint firstAttribute="trailing" secondItem="M1G-KO-fWX" secondAttribute="trailing" id="tke-F7-4zH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -277,7 +277,7 @@ BarCode</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pka-DV-l9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5004" y="-593.25337331334333"/>
+            <point key="canvasLocation" x="5002.5" y="-593.75"/>
         </scene>
         <!--Shelf Life-->
         <scene sceneID="Lk2-D8-3tW">
@@ -299,7 +299,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUK-KM-vj0" id="yrY-Bz-xfu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jom-Ux-gye">
@@ -309,9 +309,9 @@ BarCode</string>
                                                         <constraint firstAttribute="width" constant="64" id="II0-Jk-Zeg"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-ce-n5L">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="hello" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-ce-n5L">
                                                     <rect key="frame" x="20" y="8" width="253" height="63"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -498,7 +498,7 @@ BarCode</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5QY-KM-Q3Q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Kitchen" id="utV-N3-C9I"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ET7-AA-ySI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ET7-AA-ySI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -655,14 +655,13 @@ BarCode</string>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="257" id="QcX-6R-H2X"/>
-                                                    <constraint firstAttribute="width" constant="414" id="ad4-Xx-f5X"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="CPI-wJ-2Os" customClass="RecipeCreatorTableViewCell" customModule="ShelfLife" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CPI-wJ-2Os" id="Oca-wG-hz7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="cheeeeeese!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyF-di-lth">
@@ -786,7 +785,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9a-3Z-jQZ" id="pvt-hJ-JU6">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUm-Ck-JWU">
@@ -1014,7 +1013,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTf-8D-Ul4" id="5kg-He-9ty">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1053,7 +1052,7 @@ BarCode</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hTE-Tu-hOj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Categories" id="gLe-fE-vfh"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Eg-9m-Lb4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4Eg-9m-Lb4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1072,7 +1071,7 @@ BarCode</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Oy-Td-bqp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recipes" id="bSW-DY-irB"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V7o-pU-3Pi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V7o-pU-3Pi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1091,7 +1090,7 @@ BarCode</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UNr-qd-q28"/>
-        <segue reference="xyA-hh-50G"/>
-        <segue reference="B1x-l3-0i7"/>
+        <segue reference="iBn-NK-nLI"/>
+        <segue reference="pzo-tD-wMY"/>
     </inferredMetricsTieBreakers>
 </document>

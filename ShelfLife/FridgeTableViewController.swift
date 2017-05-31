@@ -32,6 +32,14 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get default categories if on first run
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "firstRun") == false {
+            defaultCategories()
+            // this should only run once
+            defaults.set(true, forKey: "firstRun")
+        }
+        
         
         // Setup left bar button item barcode
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "barcode"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.barcodeButtonPressed(_:)))
@@ -120,6 +128,11 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
         foodItems.append(foodItem2)
         foodItems.append(foodItem3)
         
+        
+    }
+    
+    func defaultCategories(){
+        
         let category1 = Category(context: context)
         category1.name = "Meats"
         if let image = UIImage(named: "meats") {
@@ -154,6 +167,7 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
             let data = UIImageJPEGRepresentation(image, 1.0)
             category5.picture = data as NSData?
         }
+        
         
         ad.saveContext()
     }
