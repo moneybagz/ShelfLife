@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShelfLife/FridgeTableViewController.swift"
-            timestampString = "522262089.940526"
+            timestampString = "522264696.000592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
             landmarkName = "deinit"
             landmarkType = "7">
          </BreakpointContent>

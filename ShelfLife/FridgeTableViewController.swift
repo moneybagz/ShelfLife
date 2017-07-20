@@ -542,6 +542,8 @@ class FridgeTableViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: - DeInit
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+        
+        print("deinitialized")
     }
     
     // MARK: - Navigation
