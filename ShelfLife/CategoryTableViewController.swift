@@ -14,8 +14,6 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet var tableView: UITableView!
     
     var foodItems = [FoodItem]()
-//    var foodInKitchen = [FoodItem]()
-//    var foodNotInKitchen = [FoodItem]()
     let headerTitles = ["In my kitchen", "Not in kitchen"]
     var fetchResultsController: NSFetchedResultsController<FoodItem>!
     var category: Category!
@@ -120,19 +118,7 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         
         let foodItem = fetchResultsController.object(at: indexPath)
         
-//        // split FoodItems between two arrays for each section
-//        if indexPath.section == 0 {
-//            // section 0 could have different values "in kitchen" / "not in kitchen"
-//            if foodItem.isInKitchen == true {
-//                foodInKitchen.append(foodItem)
-//            }
-//            else {
-//                foodNotInKitchen.append(foodItem)
-//            }
-//        }
-//        else {
-//            foodNotInKitchen.append(foodItem)
-//        }
+
         
         // CELL NAME
         cell.foodNameLabel.text = foodItem.name
@@ -255,42 +241,10 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         {
         case.insert:
             if let indexPath = newIndexPath {
-//                tableView.insertRows(at: [indexPath], with: .fade)
-//                if indexPath.section == 0 {
-//                    let foodItem = fetchResultsController.object(at: indexPath)
-//                    foodInKitchen.insert(foodItem, at: indexPath.row)
-//                }
-//                else {
-//                    let foodItem = fetchResultsController.object(at: indexPath)
-//                    foodNotInKitchen.insert(foodItem, at: indexPath.row)
-//                }
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
         case.delete:
             if let indexPath = indexPath {
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-//                if indexPath.section == 0 {
-//                    if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
-//                        // Remove section if array count will go to zero
-//                        if foodInKitchen.count == 1 {
-//                            tableView.deleteSections(IndexSet(integer: 0), with: .fade)
-//                        }
-//                        // Update array properties so correct property is segued
-//                        foodInKitchen.remove(at: indexPath.row)
-//                    }
-//                    else {
-//                        if foodNotInKitchen.count == 1 {
-//                            tableView.deleteSections(IndexSet(integer: 0), with: .fade)
-//                        }
-//                        foodNotInKitchen.remove(at: indexPath.row)
-//                    }
-//                }
-//                else {
-//                    if foodNotInKitchen.count == 1 {
-//                        tableView.deleteSections(IndexSet(integer: 1), with: .fade)
-//                    }
-//                    foodNotInKitchen.remove(at: indexPath.row)
-//                }
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         case.update:
@@ -318,23 +272,6 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
             let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! FoodItemTableViewCell
             foodItemVC.nameColor = cell.foodNameLabel.textColor
             foodItemVC.foodItem = fetchResultsController.object(at: tableView.indexPathForSelectedRow!)
-//            if let index = tableView.indexPathForSelectedRow {
-//                if index.section == 0 {
-//                    if tableView.headerView(forSection: 0)?.textLabel?.text == "In my kitchen" {
-//
-//                        destinationVC.nameColor = cell.foodNameLabel.textColor
-//                        destinationVC.foodItem = foodInKitchen[index.row]
-//                    }
-//                    else {
-//                        destinationVC.nameColor = UIColor.black
-//                        destinationVC.foodItem = foodNotInKitchen[index.row]
-//                    }
-//                }
-//                if index.section == 1 {
-//                    destinationVC.nameColor = UIColor.black
-//                    destinationVC.foodItem = foodNotInKitchen[index.row]
-//                }
-//            }
         }
         // send category property to edit
         else if segue.identifier == "toEditCategory" {
