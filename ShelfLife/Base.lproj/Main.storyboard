@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fbu-D4-mrb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fbu-D4-mrb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -223,7 +223,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tuA-sh-XnU" id="kuJ-2h-ygW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M1G-KO-fWX">
@@ -299,7 +299,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUK-KM-vj0" id="yrY-Bz-xfu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jom-Ux-gye">
@@ -384,7 +384,7 @@ BarCode</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-3H-R0e">
                                 <rect key="frame" x="0.0" y="107" width="414" height="206"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R2w-vI-8y7">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R2w-vI-8y7">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="206"/>
                                     </imageView>
                                 </subviews>
@@ -498,7 +498,7 @@ BarCode</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5QY-KM-Q3Q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Kitchen" id="utV-N3-C9I"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ET7-AA-ySI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ET7-AA-ySI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -661,7 +661,7 @@ BarCode</string>
                                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CPI-wJ-2Os" id="Oca-wG-hz7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="cheeeeeese!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyF-di-lth">
@@ -785,7 +785,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9a-3Z-jQZ" id="pvt-hJ-JU6">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUm-Ck-JWU">
@@ -1013,7 +1013,7 @@ BarCode</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTf-8D-Ul4" id="5kg-He-9ty">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1052,7 +1052,7 @@ BarCode</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hTE-Tu-hOj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Categories" id="gLe-fE-vfh"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4Eg-9m-Lb4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Eg-9m-Lb4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1071,7 +1071,7 @@ BarCode</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Oy-Td-bqp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recipes" id="bSW-DY-irB"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V7o-pU-3Pi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V7o-pU-3Pi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1089,8 +1089,8 @@ BarCode</string>
         <image name="freshBar" width="1333" height="333"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UNr-qd-q28"/>
         <segue reference="iBn-NK-nLI"/>
+        <segue reference="crH-zn-P5L"/>
         <segue reference="pzo-tD-wMY"/>
     </inferredMetricsTieBreakers>
 </document>

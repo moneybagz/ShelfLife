@@ -116,7 +116,7 @@ class RecipeCreatorViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBAction func addButtonPressed(_ sender: Any) {
         
-        guard ingredientTextField.text != nil || ingredientTextField.text != nil else {
+        guard ingredientTextField.text != nil && ingredientTextField.text != "" else {
             
             let alertController = UIAlertController(title: "CANNOT ADD INGREDIENT", message: "ingredient must have a name", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
@@ -135,7 +135,7 @@ class RecipeCreatorViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
-        guard nameTextField.text != nil || nameTextField.text != nil else {
+        guard nameTextField.text != nil && nameTextField.text != "" else {
             
             let alertController = UIAlertController(title: "CANNOT SAVE", message: "recipe must have a name", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
